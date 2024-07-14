@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{133D95DD-03F4-4EAE-89BB-076B69A60A1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FLS", "External\FLS\FLS.csproj", "{7B8AC9D8-68FC-415C-8D9E-F1629B67D34B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Boilerplates", "Boilerplates", "{EB1962C5-CA53-496E-BD7D-A29D096805A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Common", "Boilerplates\TNT.Boilerplates.Common\TNT.Boilerplates.Common.csproj", "{C5844570-2BB7-4E9E-9057-187FD38F8121}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Concurrency", "Boilerplates\TNT.Boilerplates.Concurrency\TNT.Boilerplates.Concurrency.csproj", "{5EB397AE-10EE-4A53-9E1F-FD69A9CDBA6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Diagnostic", "Boilerplates\TNT.Boilerplates.Diagnostic\TNT.Boilerplates.Diagnostic.csproj", "{67A663FB-B908-4753-A0DF-E3328709E7B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B8AC9D8-68FC-415C-8D9E-F1629B67D34B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B8AC9D8-68FC-415C-8D9E-F1629B67D34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B8AC9D8-68FC-415C-8D9E-F1629B67D34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B8AC9D8-68FC-415C-8D9E-F1629B67D34B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5844570-2BB7-4E9E-9057-187FD38F8121}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5844570-2BB7-4E9E-9057-187FD38F8121}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5844570-2BB7-4E9E-9057-187FD38F8121}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5844570-2BB7-4E9E-9057-187FD38F8121}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EB397AE-10EE-4A53-9E1F-FD69A9CDBA6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EB397AE-10EE-4A53-9E1F-FD69A9CDBA6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EB397AE-10EE-4A53-9E1F-FD69A9CDBA6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EB397AE-10EE-4A53-9E1F-FD69A9CDBA6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67A663FB-B908-4753-A0DF-E3328709E7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67A663FB-B908-4753-A0DF-E3328709E7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67A663FB-B908-4753-A0DF-E3328709E7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67A663FB-B908-4753-A0DF-E3328709E7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {305ABEF4-DF28-4B68-AAE7-426E605231E1}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7B8AC9D8-68FC-415C-8D9E-F1629B67D34B} = {133D95DD-03F4-4EAE-89BB-076B69A60A1C}
+		{C5844570-2BB7-4E9E-9057-187FD38F8121} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+		{5EB397AE-10EE-4A53-9E1F-FD69A9CDBA6D} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+		{67A663FB-B908-4753-A0DF-E3328709E7B0} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+	EndGlobalSection
+EndGlobal
