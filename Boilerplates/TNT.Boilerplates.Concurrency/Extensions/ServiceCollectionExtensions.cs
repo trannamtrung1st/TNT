@@ -1,7 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using TNT.Boilerplates.Concurrency.Abstracts;
 using TNT.Boilerplates.Concurrency.Configurations;
-using Microsoft.Extensions.Logging;
 using System;
 
 namespace TNT.Boilerplates.Concurrency.Extensions
@@ -34,33 +33,14 @@ namespace TNT.Boilerplates.Concurrency.Extensions
                 .Configure(configure);
         }
 
-        public static IServiceCollection AddMultiRateLimiters(this IServiceCollection services,
-            Action<TaskLimiterOptions> configureTaskLimiter = null,
-            Action<RateLimiterOptions> configureSizeLimiter = null)
+        public static IServiceCollection AddLimiterManager(this IServiceCollection services,
+            Action<IServiceProvider, ILimiterManager> configure)
         {
-            return services.AddSingleton<IMultiRateLimiters>(provider =>
+            return services.AddSingleton<ILimiterManager>(provider =>
             {
-                var taskLogger = provider.GetRequiredService<ILogger<SyncAsyncTaskLimiter>>();
-                TaskLimiterOptions taskLimiterOptions = null;
-                RateLimiterOptions sizeLimiterOptions = null;
-
-                if (configureTaskLimiter != null)
-                {
-                    taskLimiterOptions = new TaskLimiterOptions();
-                    configureTaskLimiter(taskLimiterOptions);
-                }
-
-                if (configureSizeLimiter != null)
-                {
-                    sizeLimiterOptions = new RateLimiterOptions();
-                    configureSizeLimiter(sizeLimiterOptions);
-                }
-
-                return new MultiRateLimiters(
-                    taskLimiterOptions,
-                    sizeLimiterOptions,
-                    taskLogger
-                );
+                var manager = new LimiterManager();
+                configure(provider, manager);
+                return manager;
             });
         }
     }
