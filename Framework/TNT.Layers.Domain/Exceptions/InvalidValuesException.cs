@@ -4,26 +4,26 @@ namespace TNT.Layers.Domain.Exceptions
 {
     public class InvalidValuesException : BaseException
     {
-        public InvalidValuesException(params PropertyError[] errors)
-            : this((IEnumerable<PropertyError>)errors)
+        public InvalidValuesException(params ValueError[] errors)
+            : this((IEnumerable<ValueError>)errors)
         {
         }
 
-        public InvalidValuesException(IEnumerable<PropertyError> errors)
+        public InvalidValuesException(IEnumerable<ValueError> errors)
             : base(ResultCode.Common.InvalidData, data: errors)
         {
         }
     }
 
-    public class PropertyError
+    public class ValueError
     {
-        public PropertyError(string propertyName, string errorCode = null)
+        public ValueError(string valueName, string errorCode = null)
         {
-            PropertyName = propertyName;
+            ValueName = valueName;
             ErrorCode = errorCode;
         }
 
-        public string PropertyName { get; set; }
+        public string ValueName { get; set; }
         public string ErrorCode { get; set; }
     }
 }
