@@ -2,7 +2,7 @@
 {
     public class PersistenceException<T> : TypedDataException<T>
     {
-        public PersistenceException(T data) : base(ResultCode.Common.PersistenceError, data: data)
+        public PersistenceException(T data) : base(ResultCodes.Common.PersistenceError, data: data)
         {
         }
     }

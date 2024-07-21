@@ -10,20 +10,24 @@ namespace TNT.Layers.Domain.Exceptions
         }
 
         public InvalidValuesException(IEnumerable<ValueError> errors)
-            : base(ResultCode.Common.InvalidData, data: errors)
+            : base(ResultCodes.Common.InvalidData, data: errors)
         {
         }
     }
 
     public class ValueError
     {
-        public ValueError(string valueName, string errorCode = null)
+        public ValueError(
+            string valueName, string errorCode = null,
+            IReadOnlyDictionary<string, object> data = null)
         {
             ValueName = valueName;
             ErrorCode = errorCode;
+            Data = data;
         }
 
-        public string ValueName { get; set; }
-        public string ErrorCode { get; set; }
+        public string ValueName { get; }
+        public string ErrorCode { get; }
+        public IReadOnlyDictionary<string, object> Data { get; }
     }
 }
