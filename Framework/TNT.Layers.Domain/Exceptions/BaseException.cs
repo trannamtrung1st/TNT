@@ -6,7 +6,8 @@ namespace TNT.Layers.Domain.Exceptions
 {
     public abstract class BaseException : Exception
     {
-        public BaseException(string resultCode,
+        public BaseException(
+            string resultCode,
             IEnumerable<string> messages = null,
             object data = null,
             LogLevel logLevel = LogLevel.Error)
