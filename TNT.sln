@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Concurrenc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Diagnostic", "Boilerplates\TNT.Boilerplates.Diagnostic\TNT.Boilerplates.Diagnostic.csproj", "{67A663FB-B908-4753-A0DF-E3328709E7B0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{41B3A1DD-9C7F-45ED-B06D-C042FCBD96EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Domain", "Framework\TNT.Layers.Domain\TNT.Layers.Domain.csproj", "{74871420-2367-4A9B-9E79-97A9C5FABA26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,10 @@ Global
 		{67A663FB-B908-4753-A0DF-E3328709E7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A663FB-B908-4753-A0DF-E3328709E7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67A663FB-B908-4753-A0DF-E3328709E7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74871420-2367-4A9B-9E79-97A9C5FABA26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74871420-2367-4A9B-9E79-97A9C5FABA26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74871420-2367-4A9B-9E79-97A9C5FABA26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74871420-2367-4A9B-9E79-97A9C5FABA26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,5 +57,6 @@ Global
 		{C5844570-2BB7-4E9E-9057-187FD38F8121} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
 		{5EB397AE-10EE-4A53-9E1F-FD69A9CDBA6D} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
 		{67A663FB-B908-4753-A0DF-E3328709E7B0} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+		{74871420-2367-4A9B-9E79-97A9C5FABA26} = {41B3A1DD-9C7F-45ED-B06D-C042FCBD96EA}
 	EndGlobalSection
 EndGlobal
