@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace TNT.Boilerplates.Common.Validation
+namespace TNT.Boilerplates.Validation.Helpers
 {
-    public static class CommonValidation
+    public static class ValidationHelper
     {
         static readonly EmailAddressAttribute _emailAddressAttribute = new EmailAddressAttribute();
 
