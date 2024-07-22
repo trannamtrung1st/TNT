@@ -6,9 +6,21 @@
         PostPersisted = 2
     }
 
-    public static class DateTimeFormat
+    public static class DateTimeFormats
     {
         public const string DDMMYYYY = "dd/MM/yyyy";
+        public const string MMDDYYYY = "MM/dd/yyyy";
+        public const string YYYYMMDD = "yyyy/MM/dd";
+        public const string YYYYMMDD_HYPHEN = "yyyy-MM-dd";
+        public const string FULL_DATE_TIME = "dddd, dd MMMM yyyy HH:mm:ss";
+        public const string SHORT_DATE_TIME = "MM/dd/yyyy HH:mm";
+        public const string TIME_12_HOUR = "hh:mm tt";
+        public const string TIME_24_HOUR = "HH:mm";
+        public const string MONTH_DAY_YEAR = "MMMM dd, yyyy";
+        public const string MONTH_YEAR = "MMMM yyyy";
+        public const string ISO_8601 = "yyyy-MM-ddTHH:mm:ss.fffK";
+        public const string RFC1123 = "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'";
+        public const string UNIVERSAL_SORTABLE = "yyyy-MM-dd HH:mm:ssZ";
     }
 
     public static class ResultCodes
@@ -22,7 +34,6 @@
             public const string AccessDenied = Prefix + "_accessdenied";
             public const string UnknownError = Prefix + "_unknownerror";
             public const string PersistenceError = Prefix + "_persistenceerror";
-            public const string InvalidPagination = Prefix + "_invalidpagination";
             public const string InvalidData = Prefix + "_invaliddata";
         }
     }
@@ -35,6 +46,7 @@
             public const string Empty = Prefix + "_empty";
             public const string Max = Prefix + "_max";
             public const string Min = Prefix + "_min";
+            public const string Range = Prefix + "_range";
             public const string Format = Prefix + "_format";
         }
     }
