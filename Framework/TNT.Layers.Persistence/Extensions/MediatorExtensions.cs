@@ -9,7 +9,7 @@ using TNT.Layers.Domain.Events;
 
 namespace TNT.Layers.Persistence.Extensions
 {
-    static class MediatorExtension
+    public static class MediatorExtension
     {
         public static async Task DispatchDomainEventsAsync(this IMediator mediator,
             DbContext ctx, DomainEventType eventType)

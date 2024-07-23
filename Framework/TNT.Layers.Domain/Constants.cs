@@ -45,10 +45,12 @@
         {
             public const string Prefix = "common";
             public const string Empty = Prefix + "_empty";
+            public const string Null = Prefix + "_null";
             public const string Max = Prefix + "_max";
             public const string Min = Prefix + "_min";
             public const string Range = Prefix + "_range";
             public const string Format = Prefix + "_format";
+            public const string Data = Prefix + "_data";
         }
     }
 }
