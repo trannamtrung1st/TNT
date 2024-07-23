@@ -35,6 +35,7 @@
             public const string UnknownError = Prefix + "_unknownerror";
             public const string PersistenceError = Prefix + "_persistenceerror";
             public const string InvalidData = Prefix + "_invaliddata";
+            public const string OperationFailed = Prefix + "_operationfailed";
         }
     }
 
