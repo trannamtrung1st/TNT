@@ -7,7 +7,7 @@ using TNT.Layers.Domain.Entities;
 
 namespace TNT.Layers.Persistence.Extensions
 {
-    internal static class DbContextExtensions
+    public static class DbContextExtensions
     {
         public static EntityEntry<E> SoftRemove<E>(this DbContext dbContext, E entity) where E : class, ISoftDeleteEntity
         {
