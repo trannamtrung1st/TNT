@@ -30,18 +30,16 @@ namespace TNT.Layers.Persistence.Services
 
         public virtual IDbContextTransaction CurrentTransaction => dbContext.Database.CurrentTransaction;
         public virtual bool HasActiveTransaction => dbContext.Database.CurrentTransaction != null;
-        private readonly IEnumerable<Assembly> _scanAssemblies = new[] { typeof(DbContextUtility).Assembly };
-        public virtual IEnumerable<Assembly> ScanAssemblies => _scanAssemblies;
 
-        public void OnModelCreating(ModelBuilder modelBuilder)
+        public void OnModelCreating(ModelBuilder modelBuilder, IEnumerable<Assembly> scanAssemblies)
         {
-            foreach (var assembly in ScanAssemblies)
+            foreach (var assembly in scanAssemblies)
                 modelBuilder.ApplyConfigurationsFromAssembly(assembly);
 
             modelBuilder.RestrictDeleteBehaviour(fkPredicate:
                 fk => !fk.GetConstraintName().Contains(ConstraintConstants.NoRestrictForeignKeyConstraintPostfix));
 
-            modelBuilder.AddGlobalQueryFilter(ScanAssemblies);
+            modelBuilder.AddGlobalQueryFilter(scanAssemblies);
         }
 
         public virtual Task ResetStateAsync()

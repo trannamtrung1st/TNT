@@ -35,12 +35,13 @@ namespace TNT.Layers.Persistence
         protected virtual DbContextUtility Utility { get; set; }
         public virtual IDbContextTransaction CurrentTransaction => Utility.CurrentTransaction;
         public virtual bool HasActiveTransaction => Utility.HasActiveTransaction;
-        protected virtual IEnumerable<Assembly> ScanAssemblies => Utility.ScanAssemblies;
+        private readonly IEnumerable<Assembly> _scanAssemblies = new[] { typeof(DbContextUtility).Assembly };
+        public virtual IEnumerable<Assembly> ScanAssemblies => _scanAssemblies;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            Utility.OnModelCreating(modelBuilder);
+            Utility.OnModelCreating(modelBuilder, scanAssemblies: ScanAssemblies);
         }
 
         public virtual Task ResetStateAsync() => Utility.ResetStateAsync();
