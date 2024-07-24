@@ -1,4 +1,8 @@
-﻿namespace System.Linq
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace System.Linq
 {
     public static class EnumerableExtensions
     {
@@ -9,6 +13,17 @@
             Array.Copy(arr, fromIdx, newArr, 0, length);
 
             return newArr;
+        }
+
+        public static async Task<List<T>> ToListAsync<T>(this IAsyncEnumerable<T> items,
+            CancellationToken cancellationToken = default)
+        {
+            var results = new List<T>();
+
+            await foreach (var item in items.WithCancellation(cancellationToken))
+                results.Add(item);
+
+            return results;
         }
     }
 }

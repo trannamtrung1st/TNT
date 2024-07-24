@@ -6,6 +6,7 @@ namespace TNT.Layers.Persistence.Services
     public class NullAuthContext<TIdentityId> : IAuthContext<TIdentityId>
     {
         public ClaimsPrincipal CurrentPrincipal { get; }
+        public string DisplayName { get; }
         public TIdentityId IdentityId { get; }
     }
 }

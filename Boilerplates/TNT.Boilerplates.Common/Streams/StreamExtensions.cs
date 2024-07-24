@@ -1,7 +1,6 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace TNT.Boilerplates.Common.Streams
+namespace System.IO
 {
     public static class StreamExtensions
     {
