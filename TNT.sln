@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Persistence", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Persistence.Identity", "Framework\TNT.Layers.Persistence.Identity\TNT.Layers.Persistence.Identity.csproj", "{00942BC9-8297-4F72-8612-5C275FBBD20E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Service", "Framework\TNT.Layers.Service\TNT.Layers.Service.csproj", "{5554FECC-3B1B-4A2D-8F7B-3946E35DECB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Services", "Framework\TNT.Layers.Services\TNT.Layers.Services.csproj", "{5554FECC-3B1B-4A2D-8F7B-3946E35DECB5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.AspectOriented", "Boilerplates\TNT.Boilerplates.AspectOriented\TNT.Boilerplates.AspectOriented.csproj", "{D108EA7C-27B8-44D1-AC78-B37811904260}"
 EndProject
