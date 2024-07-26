@@ -8,7 +8,7 @@ using System;
 using TNT.Layers.Services.AuthHandlers.Client;
 using TNT.Layers.Services.Services.Abstracts;
 
-namespace TNT.Layers.Services.Configurations.Options
+namespace TNT.Layers.Services.Configurations
 {
     public class ConfigureSwaggerGenOptions : IConfigureNamedOptions<SwaggerGenOptions>
     {

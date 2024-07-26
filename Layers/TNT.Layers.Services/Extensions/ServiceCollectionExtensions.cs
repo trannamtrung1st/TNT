@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using TNT.Layers.Services.Configurations.Options;
+using TNT.Layers.Services.Configurations;
 using TNT.Layers.Services.Filters;
 
 namespace TNT.Layers.Services.Extensions
