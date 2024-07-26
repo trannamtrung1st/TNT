@@ -37,6 +37,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.AspNetCore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Logging", "Boilerplates\TNT.Boilerplates.Logging\TNT.Boilerplates.Logging.csproj", "{CD7A3424-3B16-4FD8-8FDF-F8CC01D85142}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Background", "Boilerplates\TNT.Boilerplates.Background\TNT.Boilerplates.Background.csproj", "{77894664-BB0B-4FAD-B64B-ACFD93E51F30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Caching", "Boilerplates\TNT.Boilerplates.Caching\TNT.Boilerplates.Caching.csproj", "{B967995C-84DF-4B7E-AC1C-2EA7F1E964FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Resilience", "Boilerplates\TNT.Boilerplates.Resilience\TNT.Boilerplates.Resilience.csproj", "{A06ABB6E-7ED1-4EEB-8BDC-2F6C65BAC4DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Http", "Boilerplates\TNT.Boilerplates.Http\TNT.Boilerplates.Http.csproj", "{3BF6C9E9-177F-4AEA-AFD2-DDFFF74A9BB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,12 +107,25 @@ Global
 		{CD7A3424-3B16-4FD8-8FDF-F8CC01D85142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD7A3424-3B16-4FD8-8FDF-F8CC01D85142}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD7A3424-3B16-4FD8-8FDF-F8CC01D85142}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77894664-BB0B-4FAD-B64B-ACFD93E51F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77894664-BB0B-4FAD-B64B-ACFD93E51F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77894664-BB0B-4FAD-B64B-ACFD93E51F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77894664-BB0B-4FAD-B64B-ACFD93E51F30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B967995C-84DF-4B7E-AC1C-2EA7F1E964FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B967995C-84DF-4B7E-AC1C-2EA7F1E964FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B967995C-84DF-4B7E-AC1C-2EA7F1E964FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B967995C-84DF-4B7E-AC1C-2EA7F1E964FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A06ABB6E-7ED1-4EEB-8BDC-2F6C65BAC4DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A06ABB6E-7ED1-4EEB-8BDC-2F6C65BAC4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A06ABB6E-7ED1-4EEB-8BDC-2F6C65BAC4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A06ABB6E-7ED1-4EEB-8BDC-2F6C65BAC4DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF6C9E9-177F-4AEA-AFD2-DDFFF74A9BB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF6C9E9-177F-4AEA-AFD2-DDFFF74A9BB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF6C9E9-177F-4AEA-AFD2-DDFFF74A9BB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF6C9E9-177F-4AEA-AFD2-DDFFF74A9BB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {305ABEF4-DF28-4B68-AAE7-426E605231E1}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7B8AC9D8-68FC-415C-8D9E-F1629B67D34B} = {133D95DD-03F4-4EAE-89BB-076B69A60A1C}
@@ -121,5 +142,12 @@ Global
 		{4625999E-3370-4D13-890E-133BAF2C98C5} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
 		{0A157691-21E1-47C4-AD90-46AC40F9E530} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
 		{CD7A3424-3B16-4FD8-8FDF-F8CC01D85142} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+		{77894664-BB0B-4FAD-B64B-ACFD93E51F30} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+		{B967995C-84DF-4B7E-AC1C-2EA7F1E964FD} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+		{A06ABB6E-7ED1-4EEB-8BDC-2F6C65BAC4DE} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+		{3BF6C9E9-177F-4AEA-AFD2-DDFFF74A9BB1} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {305ABEF4-DF28-4B68-AAE7-426E605231E1}
 	EndGlobalSection
 EndGlobal
