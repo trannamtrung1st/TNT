@@ -15,19 +15,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Concurrenc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Diagnostic", "Boilerplates\TNT.Boilerplates.Diagnostic\TNT.Boilerplates.Diagnostic.csproj", "{67A663FB-B908-4753-A0DF-E3328709E7B0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{41B3A1DD-9C7F-45ED-B06D-C042FCBD96EA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Layers", "Layers", "{41B3A1DD-9C7F-45ED-B06D-C042FCBD96EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Domain", "Framework\TNT.Layers.Domain\TNT.Layers.Domain.csproj", "{74871420-2367-4A9B-9E79-97A9C5FABA26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Domain", "Layers\TNT.Layers.Domain\TNT.Layers.Domain.csproj", "{74871420-2367-4A9B-9E79-97A9C5FABA26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Application", "Framework\TNT.Layers.Application\TNT.Layers.Application.csproj", "{F1BC2C3D-6720-4DFA-9546-64B610142295}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Application", "Layers\TNT.Layers.Application\TNT.Layers.Application.csproj", "{F1BC2C3D-6720-4DFA-9546-64B610142295}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Validation", "Boilerplates\TNT.Boilerplates.Validation\TNT.Boilerplates.Validation.csproj", "{036BEB48-5B38-4B32-A547-8D54602550FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Persistence", "Framework\TNT.Layers.Persistence\TNT.Layers.Persistence.csproj", "{76C5581E-C1B0-48CE-9C8E-D8C715B89656}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Persistence", "Layers\TNT.Layers.Persistence\TNT.Layers.Persistence.csproj", "{76C5581E-C1B0-48CE-9C8E-D8C715B89656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Persistence.Identity", "Framework\TNT.Layers.Persistence.Identity\TNT.Layers.Persistence.Identity.csproj", "{00942BC9-8297-4F72-8612-5C275FBBD20E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Persistence.Identity", "Layers\TNT.Layers.Persistence.Identity\TNT.Layers.Persistence.Identity.csproj", "{00942BC9-8297-4F72-8612-5C275FBBD20E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Services", "Framework\TNT.Layers.Services\TNT.Layers.Services.csproj", "{5554FECC-3B1B-4A2D-8F7B-3946E35DECB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Layers.Services", "Layers\TNT.Layers.Services\TNT.Layers.Services.csproj", "{5554FECC-3B1B-4A2D-8F7B-3946E35DECB5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.AspectOriented", "Boilerplates\TNT.Boilerplates.AspectOriented\TNT.Boilerplates.AspectOriented.csproj", "{D108EA7C-27B8-44D1-AC78-B37811904260}"
 EndProject
