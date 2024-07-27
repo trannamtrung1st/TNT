@@ -1,6 +1,7 @@
 ﻿using Serilog.Configuration;
 using Serilog.Events;
 using System;
+using System.Linq;
 
 namespace Serilog
 {
@@ -26,6 +27,15 @@ namespace Serilog
             return writeTo.File(HostLevelLogFile,
                 rollingInterval: RollingInterval.Month,
                 restrictedToMinimumLevel: LogEventLevel.Information, outputTemplate: template);
+        }
+
+        public static LoggerConfiguration IncludeLevels(this LoggerFilterConfiguration filter,
+            params LogEventLevel[] levels)
+        {
+            if (filter == null)
+                throw new ArgumentNullException(nameof(filter));
+
+            return filter.ByIncludingOnly(e => levels.Contains(e.Level));
         }
     }
 }
