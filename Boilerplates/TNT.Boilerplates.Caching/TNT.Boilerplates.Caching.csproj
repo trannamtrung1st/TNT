@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="EasyCaching.Core" Version="1.9.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
