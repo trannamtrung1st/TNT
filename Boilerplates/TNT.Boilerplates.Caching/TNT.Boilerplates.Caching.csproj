@@ -17,4 +17,8 @@
     <None Include="../../LICENSE" Pack="true" PackagePath="/" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EasyCaching.Core" Version="1.9.2" />
+  </ItemGroup>
+
 </Project>
