@@ -5,7 +5,7 @@ namespace TNT.Boilerplates.Logging.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddLoggingDefaults(this IServiceCollection services)
+        public static IServiceCollection AddLoggingInterceptors(this IServiceCollection services)
         {
             return services.AddScoped<MethodLoggingInterceptor>()
                 .AddScoped<AttributeLoggingInterceptor>();
