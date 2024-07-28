@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
+    <Version>1.0.0</Version>
+    <Authors>Trung Tran</Authors>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/trannamtrung1st/TNT</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/trannamtrung1st/TNT</RepositoryUrl>
+    <RepositoryType>OSS</RepositoryType>
+    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
+    <OpenApiGenerateDocumentsOnBuild>false</OpenApiGenerateDocumentsOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Yarp.ReverseProxy" Version="2.2.0-preview.1.24266.1" />
+  </ItemGroup>
+
+</Project>

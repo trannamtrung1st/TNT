@@ -13,11 +13,12 @@ namespace TNT.Layers.Services.Extensions
 
         public static IApplicationBuilder UseApplicationSwagger(this IApplicationBuilder app,
             IApiVersionDescriptionProvider apiVersionProvider,
+            string routeTemplate = SwaggerDefaults.RouteTemplate,
             string prefix = SwaggerDefaults.Prefix,
             string endpointFormat = SwaggerDefaults.DocEndpointFormat)
         {
             return app
-                .UseSwagger()
+                .UseSwagger(options => options.RouteTemplate = routeTemplate)
                 .UseSwaggerUI(options =>
                 {
                     options.RoutePrefix = prefix;

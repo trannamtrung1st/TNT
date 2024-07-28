@@ -16,8 +16,9 @@
         public const string IdentityId = nameof(IdentityId);
     }
 
-    internal static class SwaggerDefaults
+    public static class SwaggerDefaults
     {
+        public const string RouteTemplate = "/swagger/{documentName}/swagger.{extension:regex(^(json|ya?ml)$)}";
         public const string Prefix = "swagger";
         public const string DocEndpointFormat = "/swagger/{0}/swagger.json";
     }

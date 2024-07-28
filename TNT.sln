@@ -49,6 +49,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Notificati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Boilerplates.Notification.Firebase", "Boilerplates\TNT.Boilerplates.Notification.Firebase\TNT.Boilerplates.Notification.Firebase.csproj", "{7BA2FED5-25E2-423D-A0F0-4931E79A41BE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{C8949FB0-E5C2-4625-97E7-4131E4F5391A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReverseProxy", "ReverseProxy", "{904B2B4E-A637-470F-B712-97FAAC3C644E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNT.Modules.ReverseProxy", "Modules\ReverseProxy\TNT.Modules.ReverseProxy\TNT.Modules.ReverseProxy.csproj", "{8A1B1FDB-557D-4F59-9278-083D55BA4240}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +141,10 @@ Global
 		{7BA2FED5-25E2-423D-A0F0-4931E79A41BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BA2FED5-25E2-423D-A0F0-4931E79A41BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BA2FED5-25E2-423D-A0F0-4931E79A41BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A1B1FDB-557D-4F59-9278-083D55BA4240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A1B1FDB-557D-4F59-9278-083D55BA4240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A1B1FDB-557D-4F59-9278-083D55BA4240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A1B1FDB-557D-4F59-9278-083D55BA4240}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,6 +170,8 @@ Global
 		{3BF6C9E9-177F-4AEA-AFD2-DDFFF74A9BB1} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
 		{12A6EBEF-483D-4D08-9092-2C1F098930E9} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
 		{7BA2FED5-25E2-423D-A0F0-4931E79A41BE} = {EB1962C5-CA53-496E-BD7D-A29D096805A7}
+		{904B2B4E-A637-470F-B712-97FAAC3C644E} = {C8949FB0-E5C2-4625-97E7-4131E4F5391A}
+		{8A1B1FDB-557D-4F59-9278-083D55BA4240} = {904B2B4E-A637-470F-B712-97FAAC3C644E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {305ABEF4-DF28-4B68-AAE7-426E605231E1}
