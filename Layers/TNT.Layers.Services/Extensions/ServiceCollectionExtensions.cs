@@ -63,6 +63,11 @@ namespace TNT.Layers.Services.Extensions
             return services.AddScoped<RequestDataExtractionMiddleware<TIdentityId>>();
         }
 
+        public static IServiceCollection AddDefaultRequestContext(this IServiceCollection services)
+        {
+            return services.AddScoped<IRequestContext, DefaultRequestContext>();
+        }
+
         public static IMvcBuilder AddControllersDefaults(this IServiceCollection services,
             Action<MvcOptions> extraConfigure = null)
         {
