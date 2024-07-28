@@ -30,9 +30,10 @@ namespace TNT.Layers.Services.Extensions
 
         public static IServiceCollection AddSwaggerDefaults(this IServiceCollection services)
         {
-            services.AddSwaggerGen();
-            services.ConfigureOptions<ConfigureSwaggerGenOptions>();
-            return services;
+            return services
+                .AddEndpointsApiExplorer()
+                .AddSwaggerGen()
+                .ConfigureOptions<ConfigureSwaggerGenOptions>();
         }
 
         public static IServiceCollection ConfigureApiBehaviorDefaults(this IServiceCollection services,
