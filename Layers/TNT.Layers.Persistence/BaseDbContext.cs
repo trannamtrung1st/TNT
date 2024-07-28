@@ -63,6 +63,9 @@ namespace TNT.Layers.Persistence
         }
         #endregion
 
+        public virtual Task MigrateAsync<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
+            => Utility.MigrateAsync<TDbContext>(serviceProvider, cancellationToken);
+
         public virtual Task SeedMigrationsAsync<TDbContext>(IServiceProvider serviceProvider)
             => Utility.SeedMigrationsAsync<TDbContext>(serviceProvider);
 

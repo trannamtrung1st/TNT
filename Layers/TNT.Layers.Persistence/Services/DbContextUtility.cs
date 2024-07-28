@@ -61,19 +61,25 @@ namespace TNT.Layers.Persistence.Services
             return true;
         }
 
-        public virtual async Task SeedMigrationsAsync<TDbContext>(IServiceProvider serviceProvider)
+        public virtual async Task MigrateAsync<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
+        {
+            await dbContext.Database.MigrateAsync(cancellationToken);
+            await SeedMigrationsAsync<TDbContext>(serviceProvider, cancellationToken);
+        }
+
+        public virtual async Task SeedMigrationsAsync<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
         {
             if (this.dbContext is not TDbContext targetDbContext)
                 return;
 
-            using var transaction = await BeginTransactionAsync();
+            using var transaction = await BeginTransactionAsync(cancellationToken);
 
             foreach (var task in MigrationTasks<TDbContext>.Tasks)
                 await task(targetDbContext, serviceProvider);
 
             MigrationTasks<TDbContext>.Tasks.Clear();
 
-            await transaction.CommitAsync();
+            await transaction.CommitAsync(cancellationToken);
         }
 
         public virtual async Task<IDbContextTransaction> BeginTransactionAsync(
