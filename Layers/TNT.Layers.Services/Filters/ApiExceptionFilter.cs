@@ -9,21 +9,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using TNT.Layers.Domain.Exceptions;
 using System.IO;
+using Microsoft.Extensions.Options;
+using TNT.Layers.Services.Configurations;
 
 namespace TNT.Layers.Services.Filters
 {
     // [IMPORTANT] used to handle predictable exceptions, per action/controller
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {
-        public const int DefaultMaxBodyLength = 10_000;
+        private readonly IOptions<ApiExceptionFilterOptions> _options;
         private readonly ILogger<ApiExceptionFilter> _logger;
 
-        public ApiExceptionFilter(ILogger<ApiExceptionFilter> logger)
+        public ApiExceptionFilter(
+            IOptions<ApiExceptionFilterOptions> options,
+            ILogger<ApiExceptionFilter> logger)
         {
+            _options = options;
             _logger = logger;
         }
-
-        protected virtual int MaxBodyLengthForLogging => DefaultMaxBodyLength;
 
         public override void OnException(ExceptionContext context)
         {
@@ -48,7 +51,7 @@ namespace TNT.Layers.Services.Filters
             var bodyInfo = string.Empty;
 
             if (request.ContentLength > 0 &&
-                request.ContentLength <= MaxBodyLengthForLogging)
+                request.ContentLength <= _options.Value.MaxBodyLengthForLogging)
             {
                 request.Body.Position = 0;
                 var bodyRaw = await request.Body.ReadAsStringAsync();
