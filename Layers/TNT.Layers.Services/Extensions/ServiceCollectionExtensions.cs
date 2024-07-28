@@ -4,6 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using TNT.Layers.Services.Configurations;
 using TNT.Layers.Services.Filters;
+using TNT.Layers.Services.Middlewares;
+using TNT.Layers.Services.Services;
+using TNT.Layers.Services.Services.Abstracts;
 
 namespace TNT.Layers.Services.Extensions
 {
@@ -45,6 +48,19 @@ namespace TNT.Layers.Services.Extensions
                 opt.SuppressModelStateInvalidFilter = true;
                 extraConfigure?.Invoke(opt);
             });
+        }
+
+        public static IServiceCollection AddOpenApiInfoFactory(this IServiceCollection services,
+            Action<OpenApiInfoOptions> configure = null)
+        {
+            return services
+                .AddSingleton<IOpenApiInfoFactory, OpenApiInfoFactory>()
+                .Configure<OpenApiInfoOptions>(opt => configure?.Invoke(opt));
+        }
+
+        public static IServiceCollection AddRequestDataExtraction<TIdentityId>(this IServiceCollection services)
+        {
+            return services.AddScoped<RequestDataExtractionMiddleware<TIdentityId>>();
         }
 
         public static IMvcBuilder AddControllersDefaults(this IServiceCollection services,

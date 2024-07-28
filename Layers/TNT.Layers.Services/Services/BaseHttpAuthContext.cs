@@ -4,11 +4,11 @@ using TNT.Layers.Persistence.Services.Abstracts;
 
 namespace TNT.Layers.Services.Services
 {
-    public abstract class HttpAuthContext<TIdentityId> : IAuthContext<TIdentityId>
+    public abstract class BaseHttpAuthContext<TIdentityId> : IAuthContext<TIdentityId>
     {
         protected readonly IHttpContextAccessor httpContextAccessor;
 
-        public HttpAuthContext(IHttpContextAccessor httpContextAccessor)
+        public BaseHttpAuthContext(IHttpContextAccessor httpContextAccessor)
         {
             this.httpContextAccessor = httpContextAccessor;
         }
