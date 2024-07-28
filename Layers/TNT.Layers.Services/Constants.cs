@@ -1,13 +1,5 @@
-﻿using System;
-using TNT.Boilerplates.Logging.Interceptors;
-
-namespace TNT.Layers.Services
+﻿namespace TNT.Layers.Services
 {
-    public static class InterceptorDefaults
-    {
-        public static readonly Type[] Types = new[] { typeof(AttributeLoggingInterceptor) };
-    }
-
     public static class EnvironmentDefaults
     {
         public static class AspNetCoreEnvs
