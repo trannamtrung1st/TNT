@@ -7,12 +7,13 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using TNT.Layers.Domain.Abstracts;
+using TNT.Layers.Persistence.Abstracts;
 using TNT.Layers.Persistence.Services;
 using TNT.Layers.Persistence.Services.Abstracts;
 
 namespace TNT.Layers.Persistence
 {
-    public abstract class BaseDbContext : DbContext, IUnitOfWork
+    public abstract class BaseDbContext : DbContext, IUnitOfWork, IDbContext
     {
         protected readonly IMediator mediator;
 

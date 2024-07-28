@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using TNT.Layers.Domain.Abstracts;
+using TNT.Layers.Persistence.Abstracts;
 using TNT.Layers.Persistence.Services;
 using TNT.Layers.Persistence.Services.Abstracts;
 
@@ -16,7 +17,7 @@ namespace TNT.Layers.Persistence.Identity
 {
     // [NOTE] same implementation as BaseDbContext
     public abstract class BaseIdentityDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken>
-        : IdentityDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken>, IUnitOfWork
+        : IdentityDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken>, IUnitOfWork, IDbContext
         where TUser : IdentityUser<TKey> where TRole : IdentityRole<TKey> where TKey : IEquatable<TKey> where TUserClaim : IdentityUserClaim<TKey> where TUserRole : IdentityUserRole<TKey> where TUserLogin : IdentityUserLogin<TKey> where TRoleClaim : IdentityRoleClaim<TKey> where TUserToken : IdentityUserToken<TKey>
     {
         protected readonly IMediator mediator;
