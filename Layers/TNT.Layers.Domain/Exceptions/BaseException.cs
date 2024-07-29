@@ -19,7 +19,15 @@ namespace TNT.Layers.Domain.Exceptions
         }
 
         public IEnumerable<string> Messages { get; }
-        public override string Message => string.Join(Environment.NewLine, Messages);
+        public override string Message
+        {
+            get
+            {
+                if (Messages != null)
+                    return string.Join(Environment.NewLine, Messages);
+                return base.Message;
+            }
+        }
         public object DataObject { get; }
         public string Code { get; }
         public LogLevel LogLevel { get; }
