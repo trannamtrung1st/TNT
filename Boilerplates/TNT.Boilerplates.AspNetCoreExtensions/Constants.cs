@@ -5,5 +5,4 @@ namespace TNT.Boilerplates.AspNetCoreExtensions
         public const string Index = "index.html";
         public const string Error = "error.html";
     }
-
 }
