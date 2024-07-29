@@ -39,7 +39,8 @@ namespace TNT.Layers.Services.Extensions
         public static async Task<IApplicationBuilder> Migrate<TDbContext>(this IApplicationBuilder app, CancellationToken cancellationToken = default)
             where TDbContext : IDbContext
         {
-            var provider = app.ApplicationServices;
+            using var scope = app.ApplicationServices.CreateScope();
+            var provider = scope.ServiceProvider;
             var dbContext = provider.GetRequiredService<TDbContext>();
             await dbContext.MigrateAsync<TDbContext>(provider, cancellationToken);
             return app;
