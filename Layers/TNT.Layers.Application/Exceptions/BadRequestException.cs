@@ -10,5 +10,10 @@ namespace TNT.Layers.Application.Exceptions
             : base(ResultCodes.Common.BadRequest, messages, data)
         {
         }
+
+        public BadRequestException(string message, object data = null)
+            : base(ResultCodes.Common.BadRequest, new[] { message }, data)
+        {
+        }
     }
 }
