@@ -11,9 +11,11 @@ using TNT.Layers.Domain.Exceptions;
 using System.IO;
 using Microsoft.Extensions.Options;
 using TNT.Layers.Services.Configurations;
+using System.Diagnostics;
 
 namespace TNT.Layers.Services.Filters
 {
+    [DebuggerStepThrough]
     // [IMPORTANT] used to handle predictable exceptions, per action/controller
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {

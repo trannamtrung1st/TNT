@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using TNT.Layers.Services.Models;
 
 namespace TNT.Layers.Services.Filters
 {
+    [DebuggerStepThrough]
     public class ValidateModelStateFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)

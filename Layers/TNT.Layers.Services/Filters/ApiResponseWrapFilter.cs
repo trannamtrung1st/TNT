@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TNT.Boilerplates.Common.Reflection;
@@ -9,6 +10,7 @@ using TNT.Layers.Services.Models;
 
 namespace TNT.Layers.Services.Filters
 {
+    [DebuggerStepThrough]
     public class ApiResponseWrapFilter : ResultFilterAttribute
     {
         public override void OnResultExecuting(ResultExecutingContext context)
