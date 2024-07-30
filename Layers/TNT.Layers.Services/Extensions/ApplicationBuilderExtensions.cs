@@ -42,10 +42,12 @@ namespace TNT.Layers.Services.Extensions
         }
 
         public static IApplicationBuilder UseSimpleRequestLogging(
-            this IApplicationBuilder app, string configKey = SimpleRequestLoggingOptions.DefaultConfigKey)
+            this IApplicationBuilder app, string configKey = SimpleRequestLoggingOptions.DefaultConfigKey,
+            Action<SimpleRequestLoggingOptions> configure = null)
         {
             var configuration = app.ApplicationServices.GetRequiredService<IConfiguration>();
             var options = configuration.GetSection(configKey).Get<SimpleRequestLoggingOptions>();
+            configure?.Invoke(options);
             return app.UseSimpleRequestLogging(options);
         }
 
@@ -57,10 +59,13 @@ namespace TNT.Layers.Services.Extensions
                 simpleOptions.CopyTo(options);
                 options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
+                    diagnosticContext.Set(nameof(Environment.NewLine), Environment.NewLine);
                     var context = httpContext.Features.Get<IExceptionHandlerFeature>();
                     var exception = context?.Error;
-                    diagnosticContext.SetException(exception);
-                    diagnosticContext.Set(nameof(Environment.NewLine), Environment.NewLine);
+                    if (exception is not null
+                        && (simpleOptions.ExceptionFilter is null
+                            || simpleOptions.ExceptionFilter(exception)))
+                        diagnosticContext.SetException(exception);
 
                     foreach (var header in simpleOptions.EnrichHeaders)
                         diagnosticContext.Set(header.Key, httpContext.Request.Headers[header.Value]);

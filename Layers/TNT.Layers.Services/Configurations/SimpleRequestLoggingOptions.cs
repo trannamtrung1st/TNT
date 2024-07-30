@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Serilog.AspNetCore;
 
 namespace TNT.Layers.Services.Configurations
@@ -7,6 +8,7 @@ namespace TNT.Layers.Services.Configurations
     {
         public const string DefaultConfigKey = "RequestLogging";
         public IDictionary<string, string> EnrichHeaders { get; set; } = new Dictionary<string, string>();
+        public Func<Exception, bool> ExceptionFilter { get; set; }
 
         public void CopyTo(RequestLoggingOptions options)
         {
