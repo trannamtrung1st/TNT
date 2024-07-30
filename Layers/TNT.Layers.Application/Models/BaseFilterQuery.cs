@@ -14,7 +14,7 @@ namespace TNT.Layers.Application.Models
             Take = take;
 
             if (!IsPageSizeValid())
-                throw new InvalidValuesException(
+                throw new BadRequestException(
                     new ValueError(valueName: nameof(Take), errorCode: ErrorCodes.Common.Range));
         }
 

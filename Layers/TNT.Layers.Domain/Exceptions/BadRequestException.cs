@@ -3,20 +3,30 @@ using FluentValidation.Results;
 
 namespace TNT.Layers.Domain.Exceptions
 {
-    public class InvalidValuesException : BaseException
+    public class BadRequestException : BaseException
     {
-        public InvalidValuesException(params ValueError[] errors)
+        public BadRequestException(params ValueError[] errors)
             : this((IEnumerable<ValueError>)errors)
         {
         }
 
-        public InvalidValuesException(IEnumerable<ValidationResult> results)
+        public BadRequestException(IEnumerable<ValidationResult> results)
             : this(ValueError.From(results))
         {
         }
 
-        public InvalidValuesException(IEnumerable<ValueError> errors)
-            : base(ResultCodes.Common.InvalidData, data: errors)
+        public BadRequestException(IEnumerable<ValueError> errors)
+            : this(messages: null, errors: errors)
+        {
+        }
+
+        public BadRequestException(params string[] messages)
+            : this(messages: messages, errors: null)
+        {
+        }
+
+        public BadRequestException(IEnumerable<ValueError> errors, IEnumerable<string> messages)
+            : base(ResultCodes.Common.BadRequest, messages: messages, data: errors)
         {
         }
     }

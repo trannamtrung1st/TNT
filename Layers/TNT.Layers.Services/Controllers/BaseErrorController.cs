@@ -28,7 +28,7 @@ namespace TNT.Layers.Services.Controllers
         protected virtual IActionResult HandleCommonException()
         {
             var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
-            var exception = context.Error;
+            var exception = context?.Error;
 
             if (exception == null)
                 return BadRequest();

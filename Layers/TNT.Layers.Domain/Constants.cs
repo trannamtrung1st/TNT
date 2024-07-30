@@ -27,15 +27,14 @@
     {
         public static class Common
         {
-            public const string Prefix = "common";
-            public const string ObjectResult = Prefix + "_object";
-            public const string NotFound = Prefix + "_notfound";
-            public const string BadRequest = Prefix + "_badrequest";
-            public const string AccessDenied = Prefix + "_accessdenied";
-            public const string UnknownError = Prefix + "_unknownerror";
-            public const string PersistenceError = Prefix + "_persistenceerror";
-            public const string InvalidData = Prefix + "_invaliddata";
-            public const string OperationFailed = Prefix + "_operationfailed";
+            public const string Prefix = "common/";
+            public const string ObjectResult = Prefix + "object";
+            public const string NotFound = Prefix + "not_found";
+            public const string BadRequest = Prefix + "bad_request";
+            public const string AccessDenied = Prefix + "access_denied";
+            public const string UnknownError = Prefix + "unknown_error";
+            public const string PersistenceError = Prefix + "persistence_error";
+            public const string OperationFailed = Prefix + "operation_failed";
         }
     }
 
