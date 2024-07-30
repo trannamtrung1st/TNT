@@ -23,7 +23,6 @@ namespace TNT.Layers.Persistence.Behaviors
             ILogger<BasePersistenceBehavior<TDbContext, TRequest, TResponse>> logger)
         {
             _dbContext = dbContext ?? throw new ArgumentException(nameof(dbContext));
-            _unitOfWork = unitOfWork;
             _logger = logger ?? throw new ArgumentException(nameof(ILogger));
             _unitOfWork = unitOfWork;
         }
