@@ -14,12 +14,16 @@ namespace TNT.Layers.Services.Configurations
     {
         private readonly IApiVersionDescriptionProvider _provider;
         private readonly IOpenApiInfoFactory _openApiInfoFactory;
+        private readonly IOptions<OpenIdInfo> _openIdInfo;
 
         public ConfigureSwaggerGenOptions(
-            IApiVersionDescriptionProvider provider, IOpenApiInfoFactory openApiInfoFactory)
+            IApiVersionDescriptionProvider provider,
+            IOpenApiInfoFactory openApiInfoFactory,
+            IOptions<OpenIdInfo> openIdInfo)
         {
             _provider = provider;
             _openApiInfoFactory = openApiInfoFactory;
+            _openIdInfo = openIdInfo;
         }
 
         public virtual void Configure(SwaggerGenOptions options)
@@ -35,8 +39,25 @@ namespace TNT.Layers.Services.Configurations
 
             options.EnableAnnotations();
 
+            var requirement = new OpenApiSecurityRequirement();
+            options.AddSecurityRequirement(requirement);
+
+            ConfigureApiKeyScheme(options, requirement);
+
+            ConfigureClientScheme(options, requirement);
+
+            if (_openIdInfo.Value.ConfigUri != null)
+                ConfigureOpenIdScheme(options, requirement);
+        }
+
+        public virtual void Configure(string name, SwaggerGenOptions options)
+        {
+            Configure(options);
+        }
+
+        protected virtual void ConfigureApiKeyScheme(SwaggerGenOptions options, OpenApiSecurityRequirement requirement)
+        {
             const string ApplicationApiKey = nameof(ApplicationApiKey);
-            const string ApplicationClient = nameof(ApplicationClient);
 
             options.AddSecurityDefinition(ApplicationApiKey,
                 new OpenApiSecurityScheme
@@ -46,6 +67,20 @@ namespace TNT.Layers.Services.Configurations
                     Name = HeaderNames.Authorization,
                     Type = SecuritySchemeType.ApiKey,
                 });
+
+            requirement[new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = ApplicationApiKey
+                }
+            }] = Array.Empty<string>();
+        }
+
+        protected virtual void ConfigureClientScheme(SwaggerGenOptions options, OpenApiSecurityRequirement requirement)
+        {
+            const string ApplicationClient = nameof(ApplicationClient);
 
             options.AddSecurityDefinition(ApplicationClient,
                 new OpenApiSecurityScheme
@@ -57,36 +92,35 @@ namespace TNT.Layers.Services.Configurations
                     Scheme = ClientAuthenticationDefaults.AuthenticationScheme
                 });
 
-            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            requirement[new OpenApiSecurityScheme
             {
+                Reference = new OpenApiReference
                 {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = ApplicationApiKey
-                        }
-                    },
-                    Array.Empty<string>()
-                },
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = ApplicationClient
-                        }
-                    },
-                    Array.Empty<string>()
+                    Type = ReferenceType.SecurityScheme,
+                    Id = ApplicationClient
                 }
-            });
+            }] = Array.Empty<string>();
         }
 
-        public virtual void Configure(string name, SwaggerGenOptions options)
+        protected virtual void ConfigureOpenIdScheme(SwaggerGenOptions options, OpenApiSecurityRequirement requirement)
         {
-            Configure(options);
+            const string ApplicationOpenId = nameof(ApplicationOpenId);
+
+            options.AddSecurityDefinition(ApplicationOpenId,
+                new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OpenIdConnect,
+                    OpenIdConnectUrl = _openIdInfo.Value.ConfigUri
+                });
+
+            requirement[new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = ApplicationOpenId
+                }
+            }] = Array.Empty<string>();
         }
 
         protected virtual OpenApiInfo CreateVersionInfo(ApiVersionDescription description)
