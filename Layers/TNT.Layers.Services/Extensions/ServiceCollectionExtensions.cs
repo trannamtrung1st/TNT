@@ -69,8 +69,12 @@ namespace TNT.Layers.Services.Extensions
         }
 
         public static IMvcBuilder AddControllersDefaults(this IServiceCollection services,
-            Action<MvcOptions> extraConfigure = null)
+            Action<MvcOptions> extraConfigure = null,
+            Action<ApiExceptionFilterOptions> configureApiExceptionFilter = null)
         {
+            if (configureApiExceptionFilter is not null)
+                services.Configure(configureApiExceptionFilter);
+
             return services.AddControllers(opt =>
             {
                 opt.Filters.Add<ValidateModelStateFilter>();
