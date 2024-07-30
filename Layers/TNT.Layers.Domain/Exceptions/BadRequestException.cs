@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentValidation.Results;
 
 namespace TNT.Layers.Domain.Exceptions
@@ -16,7 +17,7 @@ namespace TNT.Layers.Domain.Exceptions
         }
 
         public BadRequestException(IEnumerable<ValueError> errors)
-            : this(messages: null, errors: errors)
+            : this(messages: GetMessages(errors), errors: errors)
         {
         }
 
@@ -29,6 +30,9 @@ namespace TNT.Layers.Domain.Exceptions
             : base(ResultCodes.Common.BadRequest, messages: messages, data: errors)
         {
         }
+
+        private static IEnumerable<string> GetMessages(IEnumerable<ValueError> errors)
+            => errors?.Select(e => $"{e.ValueName}:{e.ErrorCode}").ToArray();
     }
 
     public class ValueError
