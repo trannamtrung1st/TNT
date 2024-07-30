@@ -45,11 +45,11 @@
             private const string Prefix = "common/";
             public const string Empty = Prefix + "empty";
             public const string Null = Prefix + "null";
-            public const string Max = Prefix + "max";
-            public const string Min = Prefix + "min";
-            public const string Range = Prefix + "range";
-            public const string Format = Prefix + "format";
-            public const string Data = Prefix + "data";
+            public const string AboveMax = Prefix + "above_max";
+            public const string UnderMin = Prefix + "under_min";
+            public const string OutOfRange = Prefix + "out_of_range";
+            public const string InvalidFormat = Prefix + "invalid_format";
+            public const string InvalidValue = Prefix + "invalid_value";
         }
     }
 }

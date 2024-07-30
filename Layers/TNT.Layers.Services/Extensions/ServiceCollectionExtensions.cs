@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using TNT.Layers.Services.Configurations;
@@ -7,6 +8,7 @@ using TNT.Layers.Services.Filters;
 using TNT.Layers.Services.Middlewares;
 using TNT.Layers.Services.Services;
 using TNT.Layers.Services.Services.Abstracts;
+using TNT.Layers.Services.Validators;
 
 namespace TNT.Layers.Services.Extensions
 {
@@ -77,11 +79,15 @@ namespace TNT.Layers.Services.Extensions
 
             return services.AddControllers(opt =>
             {
-                opt.Filters.Add<ValidateModelStateFilter>();
                 opt.Filters.Add<ApiExceptionFilter>();
                 opt.Filters.Add<ApiResponseWrapFilter>();
                 extraConfigure?.Invoke(opt);
             });
+        }
+
+        public static IServiceCollection DisableModelValidation(this IServiceCollection services)
+        {
+            return services.AddSingleton<IObjectModelValidator, NullObjectModelValidator>();
         }
     }
 }

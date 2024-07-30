@@ -32,7 +32,9 @@ namespace TNT.Layers.Domain.Exceptions
         }
 
         private static IEnumerable<string> GetMessages(IEnumerable<ValueError> errors)
-            => errors?.Select(e => $"{e.ValueName}:{e.ErrorCode}").ToArray();
+            => errors?.GroupBy(e => e.ValueName)
+                .Select(group => $"{group.Key}:{string.Join(',', group.Select(e => e.ErrorCode))}")
+                .ToArray();
     }
 
     public class ValueError
