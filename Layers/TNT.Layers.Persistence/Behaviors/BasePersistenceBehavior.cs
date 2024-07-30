@@ -12,7 +12,6 @@ using TNT.Layers.Persistence.Abstracts;
 namespace TNT.Layers.Persistence.Behaviors
 {
     public abstract class BasePersistenceBehavior<TDbContext, TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>
         where TDbContext : DbContext, IDbContext
     {
         private readonly ILogger<BasePersistenceBehavior<TDbContext, TRequest, TResponse>> _logger;
