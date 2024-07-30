@@ -1,11 +1,13 @@
 ﻿using Castle.DynamicProxy;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using TNT.Boilerplates.Logging.Extensions;
 
 namespace TNT.Boilerplates.Logging.Interceptors
 {
+    [DebuggerStepThrough]
     public class MethodLoggingInterceptor : IInterceptor
     {
         private readonly ILogger<MethodLoggingInterceptor> _logger;
