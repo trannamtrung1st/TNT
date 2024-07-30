@@ -8,9 +8,11 @@ using TNT.Layers.Application.Models.Abstracts;
 using TNT.Layers.Domain.Abstracts;
 using System.Reflection;
 using TNT.Layers.Persistence.Abstracts;
+using System.Diagnostics;
 
 namespace TNT.Layers.Persistence.Behaviors
 {
+    [DebuggerStepThrough]
     public abstract class BasePersistenceBehavior<TDbContext, TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TDbContext : DbContext, IDbContext
     {
