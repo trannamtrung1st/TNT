@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 using TNT.Layers.Application.Models.Abstracts;
 using TNT.Layers.Domain.Abstracts;
 using System.Reflection;
+using TNT.Layers.Persistence.Abstracts;
 
 namespace TNT.Layers.Persistence.Behaviors
 {
-    public abstract class PersistenceBehavior<TDbContext, TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public abstract class BasePersistenceBehavior<TDbContext, TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
-        where TDbContext : BaseDbContext
+        where TDbContext : DbContext, IDbContext
     {
-        private readonly ILogger<PersistenceBehavior<TDbContext, TRequest, TResponse>> _logger;
+        private readonly ILogger<BasePersistenceBehavior<TDbContext, TRequest, TResponse>> _logger;
         private readonly TDbContext _dbContext;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PersistenceBehavior(
+        public BasePersistenceBehavior(
             TDbContext dbContext, IUnitOfWork unitOfWork,
-            ILogger<PersistenceBehavior<TDbContext, TRequest, TResponse>> logger)
+            ILogger<BasePersistenceBehavior<TDbContext, TRequest, TResponse>> logger)
         {
             _dbContext = dbContext ?? throw new ArgumentException(nameof(dbContext));
             _unitOfWork = unitOfWork;
