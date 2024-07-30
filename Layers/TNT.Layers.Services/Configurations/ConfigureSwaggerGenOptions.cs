@@ -106,11 +106,12 @@ namespace TNT.Layers.Services.Configurations
         {
             const string ApplicationOpenId = nameof(ApplicationOpenId);
 
+            var openIdUrl = new Uri(_openIdInfo.Value.PublicConfigurationEndpoint, uriKind: UriKind.RelativeOrAbsolute);
             options.AddSecurityDefinition(ApplicationOpenId,
                 new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OpenIdConnect,
-                    OpenIdConnectUrl = new Uri(_openIdInfo.Value.PublicConfigurationEndpoint)
+                    OpenIdConnectUrl = openIdUrl
                 });
 
             requirement[new OpenApiSecurityScheme
