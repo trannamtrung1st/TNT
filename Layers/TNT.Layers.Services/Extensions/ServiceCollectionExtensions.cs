@@ -70,16 +70,11 @@ namespace TNT.Layers.Services.Extensions
             return services.AddScoped<IRequestContext, DefaultRequestContext>();
         }
 
-        public static IMvcBuilder AddControllersDefaults(this IServiceCollection services,
-            Action<MvcOptions> extraConfigure = null,
-            Action<ApiExceptionFilterOptions> configureApiExceptionFilter = null)
+        public static IMvcBuilder AddControllersDefaults(
+            this IServiceCollection services, Action<MvcOptions> extraConfigure = null)
         {
-            if (configureApiExceptionFilter is not null)
-                services.Configure(configureApiExceptionFilter);
-
             return services.AddControllers(opt =>
             {
-                opt.Filters.Add<ApiExceptionFilter>();
                 opt.Filters.Add<ApiResponseWrapFilter>();
                 extraConfigure?.Invoke(opt);
             });

@@ -17,7 +17,6 @@ using Microsoft.Extensions.Hosting;
 namespace TNT.Layers.Services.Filters
 {
     [DebuggerStepThrough]
-    // [IMPORTANT] used to handle predictable exceptions, per action/controller
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {
         private readonly IOptions<ApiExceptionFilterOptions> _options;
