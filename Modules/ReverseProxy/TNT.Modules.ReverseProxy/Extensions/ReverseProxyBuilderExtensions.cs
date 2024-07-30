@@ -33,7 +33,8 @@ namespace TNT.Modules.ReverseProxy.Extensions
                 {
                     RouteId = routeId,
                     ClusterId = clusterId,
-                    Match = new RouteMatch { Path = path }
+                    Match = new RouteMatch { Path = path },
+                    Transforms = options.DefaultTransforms
                 });
                 clusters.Add(new ClusterConfig
                 {
