@@ -46,7 +46,7 @@ namespace TNT.Layers.Services.Configurations
 
             ConfigureClientScheme(options, requirement);
 
-            if (_openIdInfo.Value.PublicConfigurationUri is not null)
+            if (_openIdInfo.Value.PublicConfigurationEndpoint is not null)
                 ConfigureOpenIdScheme(options, requirement);
         }
 
@@ -110,7 +110,7 @@ namespace TNT.Layers.Services.Configurations
                 new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OpenIdConnect,
-                    OpenIdConnectUrl = _openIdInfo.Value.PublicConfigurationUri
+                    OpenIdConnectUrl = new Uri(_openIdInfo.Value.PublicConfigurationEndpoint)
                 });
 
             requirement[new OpenApiSecurityScheme

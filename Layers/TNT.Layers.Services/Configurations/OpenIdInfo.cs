@@ -1,20 +1,57 @@
-using System;
-
 namespace TNT.Layers.Services.Configurations
 {
     public class OpenIdInfo
     {
+        public static class DefaultEndpoints
+        {
+            public const string Configuration = "/.well-known/openid-configuration";
+            public const string Token = "/connect/token";
+            public const string Cryptography = "/.well-known/jwks";
+        }
+
         public string Issuer { get; set; }
-        public Uri PublicConfigurationUri { get; set; }
-        public Uri[] TokenUris { get; set; }
-        public Uri[] ConfigurationUris { get; set; }
+        public string ServicePrefix { get; set; }
+        public string PublicConfigurationEndpoint { get; set; }
+        public string[] TokenEndpoints { get; set; }
+        public string[] ConfigurationEndpoints { get; set; }
+        public string[] CryptographyEndpoints { get; set; }
 
         public void CopyTo(OpenIdInfo target)
         {
             target.Issuer = Issuer;
-            target.PublicConfigurationUri = PublicConfigurationUri;
-            target.TokenUris = TokenUris;
-            target.ConfigurationUris = ConfigurationUris;
+            target.ServicePrefix = ServicePrefix;
+            target.PublicConfigurationEndpoint = PublicConfigurationEndpoint;
+            target.TokenEndpoints = TokenEndpoints;
+            target.ConfigurationEndpoints = ConfigurationEndpoints;
+        }
+
+        public void UseDefaults()
+        {
+            PublicConfigurationEndpoint = DefaultEndpoints.Configuration;
+            ConfigurationEndpoints = new[] { PublicConfigurationEndpoint };
+            TokenEndpoints = new[] { DefaultEndpoints.Token };
+            CryptographyEndpoints = new[] { DefaultEndpoints.Cryptography };
+        }
+
+        public void UseDefaultsWithPrefix()
+        {
+            var prefix = ServicePrefix != null ? $"/{ServicePrefix}" : null;
+            PublicConfigurationEndpoint = $"{prefix}{DefaultEndpoints.Configuration}";
+            ConfigurationEndpoints = new[]
+            {
+                PublicConfigurationEndpoint,
+                DefaultEndpoints.Configuration
+            };
+            TokenEndpoints = new[]
+            {
+                $"{prefix}{DefaultEndpoints.Token}",
+                DefaultEndpoints.Token
+            };
+            CryptographyEndpoints = new[]
+            {
+                $"{prefix}{DefaultEndpoints.Cryptography}",
+                DefaultEndpoints.Cryptography
+            };
         }
     }
 }
