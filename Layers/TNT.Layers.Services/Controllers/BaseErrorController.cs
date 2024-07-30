@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Net;
+using TNT.Layers.Domain;
 using TNT.Layers.Domain.Exceptions;
 using TNT.Layers.Services.Models;
 
@@ -31,7 +32,9 @@ namespace TNT.Layers.Services.Controllers
             var exception = context?.Error;
 
             if (exception == null)
-                return BadRequest();
+                return BadRequest(ApiResponse.Exception(
+                    new BadRequestException(
+                        new ValueError(nameof(exception), errorCode: ErrorCodes.Common.Null))));
 
             ApiResponse response = null;
             if (exception is NotFoundException notFoundEx)
