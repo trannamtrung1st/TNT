@@ -8,7 +8,8 @@ namespace TNT.Layers.Domain.Exceptions
         public AccessDeniedException(
             string resultCode = ResultCodes.Common.AccessDenied,
             IEnumerable<string> messages = null, object data = null,
-            LogLevel logLevel = LogLevel.Error) : base(resultCode, messages, data, logLevel)
+            LogLevel logLevel = LogLevel.Error
+        ) : base(resultCode, messages, data, logLevel)
         {
         }
     }

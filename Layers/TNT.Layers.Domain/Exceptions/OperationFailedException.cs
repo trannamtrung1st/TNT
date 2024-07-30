@@ -5,8 +5,10 @@ namespace TNT.Layers.Domain.Exceptions
 {
     public class OperationFailedException : BaseException
     {
-        public OperationFailedException(object data = null, IEnumerable<string> messages = null)
-            : base(ResultCodes.Common.OperationFailed, messages, data, LogLevel.Error)
+        public OperationFailedException(
+            object data = null, IEnumerable<string> messages = null,
+            LogLevel logLevel = LogLevel.Error
+        ) : base(ResultCodes.Common.OperationFailed, messages, data, logLevel)
         {
         }
     }

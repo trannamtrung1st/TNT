@@ -12,6 +12,7 @@ using System.IO;
 using Microsoft.Extensions.Options;
 using TNT.Layers.Services.Configurations;
 using System.Diagnostics;
+using Microsoft.Extensions.Hosting;
 
 namespace TNT.Layers.Services.Filters
 {
@@ -21,13 +22,16 @@ namespace TNT.Layers.Services.Filters
     {
         private readonly IOptions<ApiExceptionFilterOptions> _options;
         private readonly ILogger<ApiExceptionFilter> _logger;
+        private readonly IHostEnvironment _env;
 
         public ApiExceptionFilter(
             IOptions<ApiExceptionFilterOptions> options,
-            ILogger<ApiExceptionFilter> logger)
+            ILogger<ApiExceptionFilter> logger,
+            IHostEnvironment env)
         {
             _options = options;
             _logger = logger;
+            _env = env;
         }
 
         public override void OnException(ExceptionContext context)
@@ -42,8 +46,8 @@ namespace TNT.Layers.Services.Filters
 
         private async Task LogErrorRequestAsync(Exception ex, HttpContext httpContext)
         {
-            var acceptedLevel = new[] { LogLevel.Error, LogLevel.Critical };
-            if (ex is BaseException baseEx && !acceptedLevel.Contains(baseEx.LogLevel))
+            var handledLevels = new[] { LogLevel.Error, LogLevel.Critical };
+            if (ex is BaseException baseEx && !handledLevels.Contains(baseEx.LogLevel))
                 return;
 
             if (ex is ValidationException)
@@ -52,8 +56,8 @@ namespace TNT.Layers.Services.Filters
             var request = httpContext.Request;
             var bodyInfo = string.Empty;
 
-            if (request.ContentLength > 0 &&
-                request.ContentLength <= _options.Value.MaxBodyLengthForLogging)
+            if (!_env.IsProduction() && request.ContentLength > 0
+                && request.ContentLength <= _options.Value.MaxBodyLengthForLogging)
             {
                 request.Body.Position = 0;
                 var bodyRaw = await request.Body.ReadAsStringAsync();
@@ -66,7 +70,7 @@ namespace TNT.Layers.Services.Filters
             if (request.HasFormContentType)
                 form = new Dictionary<string, StringValues>(request.Form);
 
-            _logger.LogError("Exception on Request: {@request}{body}", new
+            _logger.LogError("Exception on request: {@request}{body}", new
             {
                 request.ContentLength,
                 request.ContentType,

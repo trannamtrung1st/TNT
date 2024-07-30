@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentValidation.Results;
+using Microsoft.Extensions.Logging;
 
 namespace TNT.Layers.Domain.Exceptions
 {
@@ -26,8 +27,10 @@ namespace TNT.Layers.Domain.Exceptions
         {
         }
 
-        public BadRequestException(IEnumerable<ValueError> errors, IEnumerable<string> messages)
-            : base(ResultCodes.Common.BadRequest, messages: messages, data: errors)
+        public BadRequestException(
+            IEnumerable<ValueError> errors, IEnumerable<string> messages,
+            LogLevel logLevel = LogLevel.Information
+        ) : base(ResultCodes.Common.BadRequest, messages: messages, data: errors, logLevel)
         {
         }
 

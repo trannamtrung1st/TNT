@@ -3,27 +3,20 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System.Net;
 using TNT.Layers.Domain;
 using TNT.Layers.Domain.Exceptions;
 using TNT.Layers.Services.Models;
 
 namespace TNT.Layers.Services.Controllers
 {
-    // [IMPORTANT] used to handle global exceptions
     [ApiExplorerSettings(IgnoreApi = true)]
     public abstract class BaseErrorController : BaseApiController
     {
-        private readonly ILogger<BaseErrorController> _logger;
         protected readonly IWebHostEnvironment env;
 
-        public BaseErrorController(
-            IWebHostEnvironment env,
-            ILogger<BaseErrorController> logger)
+        public BaseErrorController(IWebHostEnvironment env)
         {
             this.env = env;
-            _logger = logger;
         }
 
         protected virtual IActionResult HandleCommonException()
@@ -61,13 +54,9 @@ namespace TNT.Layers.Services.Controllers
             if (response == null)
             {
                 if (env.IsDevelopment())
-                    response = ApiResponse.UnknownError(exception, new[] { exception.Message });
+                    response = ApiResponse.UnknownError(messages: new[] { exception.Message });
                 else response = ApiResponse.UnknownError();
             }
-
-            _logger.LogError("{statusCode} {statusText}",
-                (int)HttpStatusCode.InternalServerError,
-                nameof(HttpStatusCode.InternalServerError));
 
             return Error(response);
         }

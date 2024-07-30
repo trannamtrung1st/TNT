@@ -1,9 +1,14 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using TNT.Layers.Persistence.Abstracts;
+using TNT.Layers.Services.Configurations;
 using TNT.Layers.Services.Middlewares;
 
 namespace TNT.Layers.Services.Extensions
@@ -34,6 +39,33 @@ namespace TNT.Layers.Services.Extensions
                             versionStr);
                     }
                 });
+        }
+
+        public static IApplicationBuilder UseSimpleRequestLogging(
+            this IApplicationBuilder app, string configKey = SimpleRequestLoggingOptions.DefaultConfigKey)
+        {
+            var configuration = app.ApplicationServices.GetRequiredService<IConfiguration>();
+            var options = configuration.GetSection(configKey).Get<SimpleRequestLoggingOptions>();
+            return app.UseSimpleRequestLogging(options);
+        }
+
+        public static IApplicationBuilder UseSimpleRequestLogging(
+            this IApplicationBuilder app, SimpleRequestLoggingOptions simpleOptions)
+        {
+            return app.UseSerilogRequestLogging(options =>
+            {
+                simpleOptions.CopyTo(options);
+                options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+                {
+                    var context = httpContext.Features.Get<IExceptionHandlerFeature>();
+                    var exception = context?.Error;
+                    diagnosticContext.SetException(exception);
+                    diagnosticContext.Set(nameof(Environment.NewLine), Environment.NewLine);
+
+                    foreach (var header in simpleOptions.EnrichHeaders)
+                        diagnosticContext.Set(header.Key, httpContext.Request.Headers[header.Value]);
+                };
+            });
         }
 
         public static async Task<IApplicationBuilder> Migrate<TDbContext>(this IApplicationBuilder app, CancellationToken cancellationToken = default)
