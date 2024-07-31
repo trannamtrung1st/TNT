@@ -8,7 +8,7 @@ namespace TNT.Layers.Domain.Exceptions
         public UnknownException(
             object data = null, IEnumerable<string> messages = null,
             LogLevel logLevel = LogLevel.Error
-        ) : base(ResultCodes.Common.UnknownError, messages, data, logLevel)
+        ) : base(ResultCodes.UnknownError, messages, data, logLevel)
         {
         }
     }

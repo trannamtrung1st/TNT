@@ -15,7 +15,7 @@ namespace TNT.Layers.Application.Models
 
             if (!IsPageSizeValid())
                 throw new BadRequestException(
-                    new ValueError(valueName: nameof(Take), errorCode: ErrorCodes.Common.OutOfRange));
+                    new ValueError(valueName: nameof(Take), errorCode: ErrorCodes.OutOfRange));
         }
 
         protected virtual int TakeMax => QueryDefaults.TakeMax;

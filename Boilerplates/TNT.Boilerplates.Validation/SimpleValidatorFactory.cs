@@ -9,5 +9,8 @@ namespace TNT.Boilerplates.Validation
     {
         public IValidator<TValue> CreateValidator<TValue>(Action<InlineValidator<WrappedValue<TValue>>> configure)
             => new SimpleValidator<TValue>(configure);
+
+        public IValidator<TValue> CreateValidator<TValue>(params IValidator<WrappedValue<TValue>>[] validators)
+            => new SimpleValidator<TValue>(validators);
     }
 }

@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using TNT.Layers.Domain;
 using TNT.Layers.Domain.Exceptions;
+using TNT.Layers.Domain.Models;
 
 namespace TNT.Layers.Services.Models
 {
@@ -25,11 +26,14 @@ namespace TNT.Layers.Services.Models
         [JsonExtensionData]
         public IDictionary<string, JsonElement> Extensions { get; set; } = new Dictionary<string, JsonElement>();
 
+        public static ApiResponse From(ResultModel result)
+            => new ApiResponse(result.Code, result.Messages, result.Data);
+
         public static ApiResponse Object(object data, IEnumerable<string> messages = null)
-            => new ApiResponse(ResultCodes.Common.ObjectResult, messages, data);
+            => new ApiResponse(ResultCodes.ObjectResult, messages, data);
 
         public static ApiResponse BadRequest(object data = null, IEnumerable<string> messages = null)
-            => new ApiResponse(ResultCodes.Common.BadRequest, messages, data);
+            => new ApiResponse(ResultCodes.BadRequest, messages, data);
 
         public static ApiResponse BadRequest(ValidationException validationException)
         {
@@ -54,9 +58,9 @@ namespace TNT.Layers.Services.Models
             => new ApiResponse(exception.Code, exception.Messages, exception.DataObject);
 
         public static ApiResponse NotFound(object data = null, IEnumerable<string> messages = null)
-            => new ApiResponse(ResultCodes.Common.NotFound, messages, data);
+            => new ApiResponse(ResultCodes.NotFound, messages, data);
 
         public static ApiResponse UnknownError(object data = null, IEnumerable<string> messages = null)
-            => new ApiResponse(ResultCodes.Common.UnknownError, messages, data);
+            => new ApiResponse(ResultCodes.UnknownError, messages, data);
     }
 }

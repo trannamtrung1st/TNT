@@ -27,7 +27,7 @@ namespace TNT.Layers.Services.Controllers
             if (exception == null)
                 return BadRequest(ApiResponse.Exception(
                     new BadRequestException(
-                        new ValueError(nameof(exception), errorCode: ErrorCodes.Common.Null))));
+                        new ValueError(nameof(exception), errorCode: ErrorCodes.Null))));
 
             ApiResponse response = null;
             if (exception is NotFoundException notFoundEx)

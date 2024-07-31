@@ -8,7 +8,7 @@ namespace TNT.Layers.Domain.Exceptions
         public OperationFailedException(
             object data = null, IEnumerable<string> messages = null,
             LogLevel logLevel = LogLevel.Error
-        ) : base(ResultCodes.Common.OperationFailed, messages, data, logLevel)
+        ) : base(ResultCodes.OperationFailed, messages, data, logLevel)
         {
         }
     }

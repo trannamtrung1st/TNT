@@ -8,7 +8,7 @@ namespace TNT.Layers.Domain.Exceptions
         public NotFoundException(
             object data = null, IEnumerable<string> messages = null,
             LogLevel logLevel = LogLevel.Information
-        ) : base(ResultCodes.Common.NotFound, messages, data, logLevel)
+        ) : base(ResultCodes.NotFound, messages, data, logLevel)
         {
         }
     }

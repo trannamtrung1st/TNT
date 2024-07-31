@@ -29,7 +29,7 @@ namespace TNT.Layers.Services.AuthHandlers.Client
 
         protected override Task HandleChallengeAsync(AuthenticationProperties properties)
         {
-            Response.Headers[HeaderNames.WWWAuthenticate] = WWWAuthenticateValue;
+            Response.Headers.WWWAuthenticate = WWWAuthenticateValue;
             return base.HandleChallengeAsync(properties);
         }
 

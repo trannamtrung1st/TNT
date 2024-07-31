@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TNT.Boilerplates.Common.Reflection;
+using TNT.Layers.Domain.Models;
 using TNT.Layers.Services.Attributes;
 using TNT.Layers.Services.Models;
 
@@ -31,7 +32,9 @@ namespace TNT.Layers.Services.Filters
             if (hasNoWrap)
                 return;
 
-            if (objectResult.Value is not ApiResponse)
+            if (objectResult.Value is ResultModel result)
+                objectResult.Value = ApiResponse.From(result);
+            else if (objectResult.Value is not ApiResponse)
                 objectResult.Value = ApiResponse.Object(objectResult.Value);
         }
     }

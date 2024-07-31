@@ -18,7 +18,16 @@ namespace TNT.Boilerplates.Validation
             _validator = inlineValidator;
         }
 
-        public IValidator<WrappedValue<TValue>> WrappedValidator => _validator;
+        public SimpleValidator(params IValidator<WrappedValue<TValue>>[] validators)
+        {
+            var inlineValidator = new InlineValidator<WrappedValue<TValue>>();
+            _validator = inlineValidator;
+
+            foreach (var validator in validators)
+                inlineValidator.Include(validator);
+        }
+
+        public IValidator<WrappedValue<TValue>> InnerValidator => _validator;
 
         public bool CanValidateInstancesOfType(Type type) => _validator.CanValidateInstancesOfType(type);
 

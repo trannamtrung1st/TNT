@@ -30,7 +30,7 @@ namespace TNT.Layers.Domain.Exceptions
         public BadRequestException(
             IEnumerable<ValueError> errors, IEnumerable<string> messages,
             LogLevel logLevel = LogLevel.Information
-        ) : base(ResultCodes.Common.BadRequest, messages: messages, data: errors, logLevel)
+        ) : base(ResultCodes.BadRequest, messages: messages, data: errors, logLevel)
         {
         }
 
@@ -71,5 +71,7 @@ namespace TNT.Layers.Domain.Exceptions
                     errors.AddRange(From(result));
             return errors;
         }
+
+        public override string ToString() => $"{ValueName}:{ErrorCode}";
     }
 }
