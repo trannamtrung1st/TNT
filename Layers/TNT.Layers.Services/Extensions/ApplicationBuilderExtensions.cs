@@ -24,7 +24,8 @@ namespace TNT.Layers.Services.Extensions
             IApiVersionDescriptionProvider apiVersionProvider,
             string routeTemplate = SwaggerDefaults.RouteTemplate,
             string prefix = SwaggerDefaults.Prefix,
-            string endpointFormat = SwaggerDefaults.DocEndpointFormat)
+            string endpointFormat = SwaggerDefaults.DocEndpointFormat,
+            bool usePkce = true)
         {
             return app
                 .UseSwagger(options => options.RouteTemplate = routeTemplate)
@@ -38,6 +39,9 @@ namespace TNT.Layers.Services.Extensions
                             string.Format(endpointFormat, versionStr),
                             versionStr);
                     }
+
+                    if (usePkce)
+                        options.OAuthUsePkce();
                 });
         }
 
