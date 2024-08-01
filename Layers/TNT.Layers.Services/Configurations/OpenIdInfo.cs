@@ -19,6 +19,7 @@ namespace TNT.Layers.Services.Configurations
         public string[] TokenEndpoints { get; set; }
         public string[] ConfigurationEndpoints { get; set; }
         public string[] CryptographyEndpoints { get; set; }
+        public string IdpPublicUrl { get; set; }
 
         #endregion Server
 
@@ -37,6 +38,7 @@ namespace TNT.Layers.Services.Configurations
             target.TokenEndpoints = TokenEndpoints;
             target.ConfigurationEndpoints = ConfigurationEndpoints;
             target.CryptographyEndpoints = CryptographyEndpoints;
+            target.IdpPublicUrl = IdpPublicUrl;
         }
 
         public void UseDefaults()
