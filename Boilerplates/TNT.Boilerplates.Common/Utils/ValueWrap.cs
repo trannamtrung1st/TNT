@@ -7,6 +7,6 @@ namespace TNT.Boilerplates.Common.Utils
             Value = value;
         }
 
-        public TValue Value { get; }
+        public TValue Value { get; private set; }
     }
 }
