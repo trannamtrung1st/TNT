@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TNT.Boilerplates.Common.Objects
+namespace TNT.Boilerplates.Common.Utils
 {
     public class ImmutableObject
     {

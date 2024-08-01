@@ -24,4 +24,8 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TNT.Boilerplates.Common\TNT.Boilerplates.Common.csproj" />
+  </ItemGroup>
+
 </Project>
