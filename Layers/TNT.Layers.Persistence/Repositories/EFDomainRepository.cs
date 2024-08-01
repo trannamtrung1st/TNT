@@ -31,7 +31,7 @@ namespace TNT.Layers.Persistence.Repositories
         public IQueryable<T> NoTrackedQuery => dbContext.Set<T>().AsNoTracking();
         public IQueryable<T> TrackedQuery => dbContext.Set<T>().AsTracking();
 
-        public async Task<T> AddAsync(T entity)
+        public async Task<T> Create(T entity)
         {
             EntityEntry<T> entry = dbContext.Entry(entity);
 
@@ -43,7 +43,7 @@ namespace TNT.Layers.Persistence.Repositories
             return entity;
         }
 
-        public Task<T> UpdateAsync(T entity)
+        public Task<T> Update(T entity)
         {
             EntityEntry<T> entry = dbContext.Entry(entity);
 
@@ -55,13 +55,13 @@ namespace TNT.Layers.Persistence.Repositories
             return Task.FromResult(entity);
         }
 
-        public Task<T> DeleteAsync(T entity)
+        public Task<T> Delete(T entity)
         {
             entity = dbContext.Remove(entity).Entity;
 
             return Task.FromResult(entity);
         }
 
-        public abstract Task<T> FindByIdAsync(TKey id);
+        public abstract Task<T> FindById(TKey id);
     }
 }

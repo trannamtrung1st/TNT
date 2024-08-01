@@ -79,7 +79,7 @@ namespace TNT.Layers.Services.Extensions
             using var scope = app.ApplicationServices.CreateScope();
             var provider = scope.ServiceProvider;
             var dbContext = provider.GetRequiredService<TDbContext>();
-            await dbContext.MigrateAsync<TDbContext>(provider, cancellationToken);
+            await dbContext.Migrate<TDbContext>(provider, cancellationToken);
             return app;
         }
     }

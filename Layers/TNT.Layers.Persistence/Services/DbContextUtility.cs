@@ -42,7 +42,7 @@ namespace TNT.Layers.Persistence.Services
             modelBuilder.AddGlobalQueryFilter(scanAssemblies);
         }
 
-        public virtual Task ResetStateAsync()
+        public virtual Task ResetState()
         {
             var entries = dbContext.ChangeTracker.Entries().ToArray();
             foreach (var entry in entries)
@@ -50,29 +50,29 @@ namespace TNT.Layers.Persistence.Services
             return Task.CompletedTask;
         }
 
-        public virtual async Task<bool> SaveEntitiesAsync(bool dispatchEvents = true, CancellationToken cancellationToken = default)
+        public virtual async Task<bool> SaveEntities(bool dispatchEvents = true, CancellationToken cancellationToken = default)
         {
-            if (dispatchEvents) await mediator.DispatchDomainEventsAsync(dbContext, Domain.DomainEventType.PrePersisted);
+            if (dispatchEvents) await mediator.DispatchDomainEvents(dbContext, Domain.DomainEventType.PrePersisted);
 
             int result = await dbContext.SaveChangesAsync(cancellationToken);
 
-            if (dispatchEvents) await mediator.DispatchDomainEventsAsync(dbContext, Domain.DomainEventType.PostPersisted);
+            if (dispatchEvents) await mediator.DispatchDomainEvents(dbContext, Domain.DomainEventType.PostPersisted);
 
             return true;
         }
 
-        public virtual async Task MigrateAsync<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
+        public virtual async Task Migrate<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
         {
             await dbContext.Database.MigrateAsync(cancellationToken);
-            await SeedMigrationsAsync<TDbContext>(serviceProvider, cancellationToken);
+            await SeedMigrations<TDbContext>(serviceProvider, cancellationToken);
         }
 
-        public virtual async Task SeedMigrationsAsync<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
+        public virtual async Task SeedMigrations<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
         {
             if (this.dbContext is not TDbContext targetDbContext)
                 return;
 
-            using var transaction = await BeginTransactionAsync(cancellationToken);
+            using var transaction = await BeginTransaction(cancellationToken);
 
             foreach (var task in MigrationTasks<TDbContext>.Tasks)
                 await task(targetDbContext, serviceProvider);
@@ -82,7 +82,7 @@ namespace TNT.Layers.Persistence.Services
             await transaction.CommitAsync(cancellationToken);
         }
 
-        public virtual async Task<IDbContextTransaction> BeginTransactionAsync(
+        public virtual async Task<IDbContextTransaction> BeginTransaction(
             CancellationToken cancellationToken = default)
         {
             if (HasActiveTransaction) return null;

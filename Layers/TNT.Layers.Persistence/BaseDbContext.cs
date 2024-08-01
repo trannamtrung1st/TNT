@@ -45,10 +45,10 @@ namespace TNT.Layers.Persistence
             Utility.OnModelCreating(modelBuilder, scanAssemblies: ScanAssemblies);
         }
 
-        public virtual Task ResetStateAsync() => Utility.ResetStateAsync();
+        public virtual Task ResetState() => Utility.ResetState();
 
-        public virtual async Task<bool> SaveEntitiesAsync(bool dispatchEvents = true, CancellationToken cancellationToken = default)
-            => await Utility.SaveEntitiesAsync(dispatchEvents, cancellationToken);
+        public virtual async Task<bool> SaveEntities(bool dispatchEvents = true, CancellationToken cancellationToken = default)
+            => await Utility.SaveEntities(dispatchEvents, cancellationToken);
 
         #region SaveChanges
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -64,14 +64,14 @@ namespace TNT.Layers.Persistence
         }
         #endregion
 
-        public virtual Task MigrateAsync<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
-            => Utility.MigrateAsync<TDbContext>(serviceProvider, cancellationToken);
+        public virtual Task Migrate<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
+            => Utility.Migrate<TDbContext>(serviceProvider, cancellationToken);
 
-        public virtual Task SeedMigrationsAsync<TDbContext>(IServiceProvider serviceProvider)
-            => Utility.SeedMigrationsAsync<TDbContext>(serviceProvider);
+        public virtual Task SeedMigrations<TDbContext>(IServiceProvider serviceProvider)
+            => Utility.SeedMigrations<TDbContext>(serviceProvider);
 
-        public virtual Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
-            => Utility.BeginTransactionAsync(cancellationToken);
+        public virtual Task<IDbContextTransaction> BeginTransaction(CancellationToken cancellationToken = default)
+            => Utility.BeginTransaction(cancellationToken);
 
         protected virtual void AuditEntities() => Utility.AuditEntities();
     }

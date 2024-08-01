@@ -40,11 +40,11 @@ namespace TNT.Layers.Persistence.Behaviors
                 var strategy = _dbContext.Database.CreateExecutionStrategy();
                 await strategy.ExecuteAsync(async () =>
                 {
-                    using var transaction = await _dbContext.BeginTransactionAsync();
+                    using var transaction = await _dbContext.BeginTransaction();
                     try
                     {
                         response = await next();
-                        await _unitOfWork.SaveEntitiesAsync();
+                        await _unitOfWork.SaveEntities();
                         await transaction.CommitAsync();
                     }
                     catch (Exception)
@@ -57,7 +57,7 @@ namespace TNT.Layers.Persistence.Behaviors
             else
             {
                 response = await next();
-                await _unitOfWork.SaveEntitiesAsync(cancellationToken: cancellationToken);
+                await _unitOfWork.SaveEntities(cancellationToken: cancellationToken);
             }
 
             return response;

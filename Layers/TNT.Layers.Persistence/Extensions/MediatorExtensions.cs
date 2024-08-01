@@ -11,7 +11,7 @@ namespace TNT.Layers.Persistence.Extensions
 {
     public static class MediatorExtension
     {
-        public static async Task DispatchDomainEventsAsync(this IMediator mediator,
+        public static async Task DispatchDomainEvents(this IMediator mediator,
             DbContext ctx, DomainEventType eventType)
         {
             CheckDomainEvents(ctx, eventType, out var domainEvents, out var domainEntities);

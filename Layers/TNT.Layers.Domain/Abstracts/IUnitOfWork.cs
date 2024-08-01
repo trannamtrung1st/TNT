@@ -6,11 +6,11 @@ namespace TNT.Layers.Domain.Abstracts
 {
     public interface IUnitOfWork : IDisposable
     {
-        Task ResetStateAsync();
+        Task ResetState();
 
         /// <summary>
         /// [IMPORTANT] Should dispatch domain events and add auditing info
         /// </summary>
-        Task<bool> SaveEntitiesAsync(bool dispatchEvents = true, CancellationToken cancellationToken = default);
+        Task<bool> SaveEntities(bool dispatchEvents = true, CancellationToken cancellationToken = default);
     }
 }

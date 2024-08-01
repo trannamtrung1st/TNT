@@ -10,12 +10,12 @@ namespace TNT.Layers.Persistence.Abstracts
         IDbContextTransaction CurrentTransaction { get; }
         bool HasActiveTransaction { get; }
 
-        Task ResetStateAsync();
-        Task<bool> SaveEntitiesAsync(bool dispatchEvents = true, CancellationToken cancellationToken = default);
+        Task ResetState();
+        Task<bool> SaveEntities(bool dispatchEvents = true, CancellationToken cancellationToken = default);
         int SaveChanges(bool acceptAllChangesOnSuccess);
         Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default);
-        Task MigrateAsync<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default);
-        Task SeedMigrationsAsync<TDbContext>(IServiceProvider serviceProvider);
-        Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
+        Task Migrate<TDbContext>(IServiceProvider serviceProvider, CancellationToken cancellationToken = default);
+        Task SeedMigrations<TDbContext>(IServiceProvider serviceProvider);
+        Task<IDbContextTransaction> BeginTransaction(CancellationToken cancellationToken = default);
     }
 }

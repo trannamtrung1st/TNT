@@ -35,15 +35,15 @@ namespace TNT.Layers.Services.Filters
 
         public override void OnException(ExceptionContext context)
         {
-            LogErrorRequestAsync(context.Exception, context.HttpContext).Wait();
+            LogErrorRequest(context.Exception, context.HttpContext).Wait();
         }
 
         public override async Task OnExceptionAsync(ExceptionContext context)
         {
-            await LogErrorRequestAsync(context.Exception, context.HttpContext);
+            await LogErrorRequest(context.Exception, context.HttpContext);
         }
 
-        private async Task LogErrorRequestAsync(Exception ex, HttpContext httpContext)
+        private async Task LogErrorRequest(Exception ex, HttpContext httpContext)
         {
             var handledLevels = new[] { LogLevel.Error, LogLevel.Critical };
             if (ex is BaseException baseEx && !handledLevels.Contains(baseEx.LogLevel))
