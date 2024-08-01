@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using TNT.Layers.Domain;
 using TNT.Layers.Domain.Exceptions;
+using TNT.Layers.Domain.Models;
 using TNT.Layers.Services.Models;
 
 namespace TNT.Layers.Services.Controllers

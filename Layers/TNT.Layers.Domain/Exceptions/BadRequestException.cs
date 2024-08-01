@@ -2,6 +2,8 @@
 using System.Linq;
 using FluentValidation.Results;
 using Microsoft.Extensions.Logging;
+using TNT.Layers.Domain.Extensions;
+using TNT.Layers.Domain.Models;
 
 namespace TNT.Layers.Domain.Exceptions
 {
@@ -18,7 +20,7 @@ namespace TNT.Layers.Domain.Exceptions
         }
 
         public BadRequestException(IEnumerable<ValueError> errors)
-            : this(messages: GetMessages(errors), errors: errors)
+            : this(messages: ValueError.GetMessages(errors), errors: errors)
         {
         }
 
@@ -30,48 +32,8 @@ namespace TNT.Layers.Domain.Exceptions
         public BadRequestException(
             IEnumerable<ValueError> errors, IEnumerable<string> messages,
             LogLevel logLevel = LogLevel.Information
-        ) : base(ResultCodes.BadRequest, messages: messages, data: errors, logLevel)
+        ) : base(ResultCodes.BadRequest, messages: messages, data: errors.HasData().ToArray(), logLevel)
         {
         }
-
-        private static IEnumerable<string> GetMessages(IEnumerable<ValueError> errors)
-            => errors?.GroupBy(e => e.ValueName)
-                .Select(group => $"{group.Key}:{string.Join(',', group.Select(e => e.ErrorCode))}")
-                .ToArray();
-    }
-
-    public class ValueError
-    {
-        public ValueError(
-            string valueName, string errorCode = null,
-            IReadOnlyDictionary<string, object> data = null)
-        {
-            ValueName = valueName;
-            ErrorCode = errorCode;
-            Data = data;
-        }
-
-        public string ValueName { get; }
-        public string ErrorCode { get; }
-        public IReadOnlyDictionary<string, object> Data { get; }
-
-        public static IEnumerable<ValueError> From(ValidationResult result)
-        {
-            var errors = new List<ValueError>();
-            foreach (var error in result.Errors)
-                errors.Add(new ValueError(error.PropertyName, error.ErrorCode));
-            return errors;
-        }
-
-        public static IEnumerable<ValueError> From(IEnumerable<ValidationResult> results)
-        {
-            var errors = new List<ValueError>();
-            foreach (var result in results)
-                if (!result.IsValid)
-                    errors.AddRange(From(result));
-            return errors;
-        }
-
-        public override string ToString() => $"{ValueName}:{ErrorCode}";
     }
 }

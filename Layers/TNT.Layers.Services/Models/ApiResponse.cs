@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using TNT.Layers.Domain;
 using TNT.Layers.Domain.Exceptions;
+using TNT.Layers.Domain.Extensions;
 using TNT.Layers.Domain.Models;
 
 namespace TNT.Layers.Services.Models
@@ -40,7 +41,8 @@ namespace TNT.Layers.Services.Models
             var validationErrors = validationException.Errors
                 .Select(o => new ValueError(valueName: o.PropertyName, errorCode: o.ErrorCode))
                 .ToArray();
-            var apiResponse = BadRequest(validationErrors);
+            var messages = ValueError.GetMessages(validationErrors);
+            var apiResponse = BadRequest(data: validationErrors.HasData().ToArray(), messages: messages);
             return apiResponse;
         }
 

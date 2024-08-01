@@ -1,6 +1,7 @@
 ﻿using TNT.Layers.Application.Models.Abstracts;
 using TNT.Layers.Domain;
 using TNT.Layers.Domain.Exceptions;
+using TNT.Layers.Domain.Models;
 
 namespace TNT.Layers.Application.Models
 {
