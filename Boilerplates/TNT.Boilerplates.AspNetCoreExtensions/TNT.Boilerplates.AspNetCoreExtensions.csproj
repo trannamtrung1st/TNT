@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TNT.Boilerplates.Http\TNT.Boilerplates.Http.csproj" />
+    <ProjectReference Include="..\TNT.Boilerplates.Common\TNT.Boilerplates.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using TNT.Boilerplates.Http;
+using TNT.Boilerplates.Common;
 
 namespace TNT.Boilerplates.AspNetCoreExtensions.Extensions
 {
