@@ -22,9 +22,9 @@ namespace TNT.Layers.Services.Controllers
             return StatusCode((int)HttpStatusCode.Forbidden, obj);
         }
 
-        protected string GetAuthorityLeftPart()
+        protected string GetAuthority()
         {
-            return new Uri(Request.GetEncodedUrl()).GetLeftPart(UriPartial.Authority);
+            return new Uri(Request.GetEncodedUrl()).Authority;
         }
     }
 }

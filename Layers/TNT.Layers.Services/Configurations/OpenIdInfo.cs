@@ -13,7 +13,6 @@ namespace TNT.Layers.Services.Configurations
         #region Server
 
         public string Issuer { get; set; }
-        public string ServicePrefix { get; set; }
         public string PublicConfigurationEndpoint { get; set; }
         public string[] AuthorizationEndpoints { get; set; }
         public string[] TokenEndpoints { get; set; }
@@ -32,7 +31,6 @@ namespace TNT.Layers.Services.Configurations
         public void CopyTo(OpenIdInfo target)
         {
             target.Issuer = Issuer;
-            target.ServicePrefix = ServicePrefix;
             target.PublicConfigurationEndpoint = PublicConfigurationEndpoint;
             target.AuthorizationEndpoints = AuthorizationEndpoints;
             target.TokenEndpoints = TokenEndpoints;
@@ -48,32 +46,6 @@ namespace TNT.Layers.Services.Configurations
             AuthorizationEndpoints = new[] { DefaultEndpoints.Authorization };
             TokenEndpoints = new[] { DefaultEndpoints.Token };
             CryptographyEndpoints = new[] { DefaultEndpoints.Cryptography };
-        }
-
-        public void UseDefaultsWithPrefix()
-        {
-            var prefix = ServicePrefix != null ? $"/{ServicePrefix}" : null;
-            PublicConfigurationEndpoint = $"{prefix}{DefaultEndpoints.Configuration}";
-            ConfigurationEndpoints = new[]
-            {
-                PublicConfigurationEndpoint,
-                DefaultEndpoints.Configuration
-            };
-            AuthorizationEndpoints = new[]
-            {
-                $"{prefix}{DefaultEndpoints.Authorization}",
-                DefaultEndpoints.Authorization
-            };
-            TokenEndpoints = new[]
-            {
-                $"{prefix}{DefaultEndpoints.Token}",
-                DefaultEndpoints.Token
-            };
-            CryptographyEndpoints = new[]
-            {
-                $"{prefix}{DefaultEndpoints.Cryptography}",
-                DefaultEndpoints.Cryptography
-            };
         }
     }
 }

@@ -24,5 +24,14 @@ namespace TNT.Boilerplates.AspNetCoreExtensions.Extensions
                 await next();
             });
         }
+
+        public static IApplicationBuilder UseHostHeader(this IApplicationBuilder app, string host)
+        {
+            return app.Use(async (context, next) =>
+            {
+                context.Request.Headers.Host = host;
+                await next();
+            });
+        }
     }
 }

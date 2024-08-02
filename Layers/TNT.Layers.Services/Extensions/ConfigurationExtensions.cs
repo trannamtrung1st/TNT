@@ -7,17 +7,13 @@ namespace TNT.Layers.Services.Extensions
     public static class ConfigurationExtensions
     {
         public static OpenIdInfo GetOpenIdInfo(this IConfiguration configuration,
-            string configKey = nameof(OpenIdInfo), bool useDefaults = true, bool withPrefix = true)
+            string configKey = nameof(OpenIdInfo), bool useDefaults = true)
         {
             var openIdInfo = configuration.GetSection(configKey).Get<OpenIdInfo>()
                 ?? throw new ArgumentNullException(paramName: configKey);
 
             if (useDefaults)
-            {
-                if (withPrefix)
-                    openIdInfo.UseDefaultsWithPrefix();
-                else openIdInfo.UseDefaults();
-            }
+                openIdInfo.UseDefaults();
 
             return openIdInfo;
         }
