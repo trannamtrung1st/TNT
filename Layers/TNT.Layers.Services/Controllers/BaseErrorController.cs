@@ -28,7 +28,7 @@ namespace TNT.Layers.Services.Controllers
             if (exception == null)
                 return BadRequest(ApiResponse.Exception(
                     new BadRequestException(
-                        new ValueError(nameof(exception), errorCode: ErrorCodes.Null))));
+                        new ValueDetails(nameof(exception), detailCode: DetailCodes.Null))));
 
             ApiResponse response = null;
             if (exception is NotFoundException notFoundEx)
@@ -55,7 +55,7 @@ namespace TNT.Layers.Services.Controllers
             if (response == null)
             {
                 if (env.IsDevelopment())
-                    response = ApiResponse.UnknownError(messages: new[] { exception.Message });
+                    response = ApiResponse.UnknownError(details: new[] { exception.Message });
                 else response = ApiResponse.UnknownError();
             }
 

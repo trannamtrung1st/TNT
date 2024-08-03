@@ -35,7 +35,7 @@
         public const string OperationFailed = Prefix + "operation_failed";
     }
 
-    public static class ErrorCodes
+    public static class DetailCodes
     {
         private const string Prefix = "common/";
         public const string Empty = Prefix + "empty";

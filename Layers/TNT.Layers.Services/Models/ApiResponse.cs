@@ -13,36 +13,36 @@ namespace TNT.Layers.Services.Models
 {
     public class ApiResponse
     {
-        protected ApiResponse(string code, IEnumerable<string> messages = null, object data = null)
+        protected ApiResponse(string code, IEnumerable<string> details = null, object data = null)
         {
             Code = code;
-            Messages = messages;
+            Details = details;
             Data = data;
         }
 
         public string Code { get; }
-        public IEnumerable<string> Messages { get; }
+        public IEnumerable<string> Details { get; }
         public object Data { get; }
 
         [JsonExtensionData]
         public IDictionary<string, JsonElement> Extensions { get; set; } = new Dictionary<string, JsonElement>();
 
         public static ApiResponse From(ResultModel result)
-            => new ApiResponse(result.Code, result.Messages, result.Data);
+            => new ApiResponse(result.Code, result.Details, result.Data);
 
-        public static ApiResponse Object(object data, IEnumerable<string> messages = null)
-            => new ApiResponse(ResultCodes.ObjectResult, messages, data);
+        public static ApiResponse Object(object data, IEnumerable<string> details = null)
+            => new ApiResponse(ResultCodes.ObjectResult, details, data);
 
-        public static ApiResponse BadRequest(object data = null, IEnumerable<string> messages = null)
-            => new ApiResponse(ResultCodes.BadRequest, messages, data);
+        public static ApiResponse BadRequest(object data = null, IEnumerable<string> details = null)
+            => new ApiResponse(ResultCodes.BadRequest, details, data);
 
         public static ApiResponse BadRequest(ValidationException validationException)
         {
             var validationErrors = validationException.Errors
-                .Select(o => new ValueError(valueName: o.PropertyName, errorCode: o.ErrorCode))
+                .Select(o => new ValueDetails(valueName: o.PropertyName, detailCode: o.ErrorCode))
                 .ToArray();
-            var messages = ValueError.GetMessages(validationErrors);
-            var apiResponse = BadRequest(data: validationErrors.HasData().ToArray(), messages: messages);
+            var details = ValueDetails.GetDetails(validationErrors);
+            var apiResponse = BadRequest(data: validationErrors.HasData().ToArray(), details: details);
             return apiResponse;
         }
 
@@ -50,19 +50,19 @@ namespace TNT.Layers.Services.Models
         {
             var validationErrors = modelState.Values
                 .SelectMany(o => o.Errors)
-                .Select(o => new ValueError(valueName: nameof(modelState), errorCode: o.ErrorMessage))
+                .Select(o => new ValueDetails(valueName: nameof(modelState), detailCode: o.ErrorMessage))
                 .ToArray();
             var apiResponse = BadRequest(validationErrors);
             return apiResponse;
         }
 
         public static ApiResponse Exception(BaseException exception)
-            => new ApiResponse(exception.Code, exception.Messages, exception.DataObject);
+            => new ApiResponse(code: exception.Code, details: exception.Details, data: exception.DataObject);
 
-        public static ApiResponse NotFound(object data = null, IEnumerable<string> messages = null)
-            => new ApiResponse(ResultCodes.NotFound, messages, data);
+        public static ApiResponse NotFound(object data = null, IEnumerable<string> details = null)
+            => new ApiResponse(ResultCodes.NotFound, details, data);
 
-        public static ApiResponse UnknownError(object data = null, IEnumerable<string> messages = null)
-            => new ApiResponse(ResultCodes.UnknownError, messages, data);
+        public static ApiResponse UnknownError(object data = null, IEnumerable<string> details = null)
+            => new ApiResponse(ResultCodes.UnknownError, details, data);
     }
 }

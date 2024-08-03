@@ -6,23 +6,23 @@ namespace TNT.Layers.Domain.Models
     {
         public ResultModel(object data,
             string code = ResultCodes.ObjectResult,
-            IEnumerable<string> messages = null)
+            IEnumerable<string> details = null)
         {
             Data = data;
             Code = code;
-            Messages = messages;
+            Details = details;
         }
 
         public object Data { get; }
         public string Code { get; }
-        public IEnumerable<string> Messages { get; }
+        public IEnumerable<string> Details { get; }
     }
 
     public class ResultModel<T> : ResultModel
     {
         public ResultModel(T data,
             string code = ResultCodes.ObjectResult,
-            IEnumerable<string> messages = null) : base(data, code, messages)
+            IEnumerable<string> details = null) : base(data, code, details)
         {
             Data = data;
         }

@@ -8,23 +8,23 @@ namespace TNT.Layers.Domain.Exceptions
     {
         public BaseException(
             string resultCode,
-            IEnumerable<string> messages = null,
+            IEnumerable<string> details = null,
             object data = null,
             LogLevel logLevel = LogLevel.Error)
         {
             Code = resultCode;
             DataObject = data;
-            Messages = messages;
+            Details = details;
             LogLevel = logLevel;
         }
 
-        public IEnumerable<string> Messages { get; }
+        public IEnumerable<string> Details { get; }
         public override string Message
         {
             get
             {
-                if (Messages != null)
-                    return string.Join(Environment.NewLine, Messages);
+                if (Details != null)
+                    return string.Join(Environment.NewLine, Details);
                 return base.Message;
             }
         }

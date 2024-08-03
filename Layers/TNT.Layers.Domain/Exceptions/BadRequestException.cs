@@ -9,18 +9,18 @@ namespace TNT.Layers.Domain.Exceptions
 {
     public class BadRequestException : BaseException
     {
-        public BadRequestException(params ValueError[] errors)
-            : this((IEnumerable<ValueError>)errors)
+        public BadRequestException(params ValueDetails[] errors)
+            : this((IEnumerable<ValueDetails>)errors)
         {
         }
 
         public BadRequestException(IEnumerable<ValidationResult> results)
-            : this(ValueError.From(results))
+            : this(ValueDetails.From(results))
         {
         }
 
-        public BadRequestException(IEnumerable<ValueError> errors)
-            : this(messages: ValueError.GetMessages(errors), errors: errors)
+        public BadRequestException(IEnumerable<ValueDetails> errors)
+            : this(messages: ValueDetails.GetDetails(errors), errors: errors)
         {
         }
 
@@ -30,9 +30,9 @@ namespace TNT.Layers.Domain.Exceptions
         }
 
         public BadRequestException(
-            IEnumerable<ValueError> errors, IEnumerable<string> messages,
+            IEnumerable<ValueDetails> errors, IEnumerable<string> messages,
             LogLevel logLevel = LogLevel.Information
-        ) : base(ResultCodes.BadRequest, messages: messages, data: errors.HasData().ToArray(), logLevel)
+        ) : base(ResultCodes.BadRequest, details: messages, data: errors.HasData().ToArray(), logLevel)
         {
         }
     }
