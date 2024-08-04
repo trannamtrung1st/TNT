@@ -7,6 +7,8 @@ namespace TNT.Layers.Services.Configurations
             public const string Configuration = "/.well-known/openid-configuration";
             public const string Authorization = "/connect/authorize";
             public const string Token = "/connect/token";
+            public const string Logout = "/connect/logout";
+            public const string UserInfo = "/connect/userinfo";
             public const string Cryptography = "/.well-known/jwks";
         }
 
@@ -18,6 +20,8 @@ namespace TNT.Layers.Services.Configurations
         public string[] TokenEndpoints { get; set; }
         public string[] ConfigurationEndpoints { get; set; }
         public string[] CryptographyEndpoints { get; set; }
+        public string[] LogoutEndpoints { get; set; }
+        public string[] UserInfoEndpoints { get; set; }
         public string IdpPublicUrl { get; set; }
 
         #endregion Server
@@ -36,6 +40,8 @@ namespace TNT.Layers.Services.Configurations
             target.TokenEndpoints = TokenEndpoints;
             target.ConfigurationEndpoints = ConfigurationEndpoints;
             target.CryptographyEndpoints = CryptographyEndpoints;
+            target.LogoutEndpoints = LogoutEndpoints;
+            target.UserInfoEndpoints = UserInfoEndpoints;
             target.IdpPublicUrl = IdpPublicUrl;
         }
 
@@ -46,6 +52,8 @@ namespace TNT.Layers.Services.Configurations
             AuthorizationEndpoints = new[] { DefaultEndpoints.Authorization };
             TokenEndpoints = new[] { DefaultEndpoints.Token };
             CryptographyEndpoints = new[] { DefaultEndpoints.Cryptography };
+            LogoutEndpoints = new[] { DefaultEndpoints.Logout };
+            UserInfoEndpoints = new[] { DefaultEndpoints.UserInfo };
         }
     }
 }
