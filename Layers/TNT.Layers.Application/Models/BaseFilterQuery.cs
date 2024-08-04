@@ -1,7 +1,5 @@
 ﻿using TNT.Layers.Application.Models.Abstracts;
-using TNT.Layers.Domain;
 using TNT.Layers.Domain.Exceptions;
-using TNT.Layers.Domain.Models;
 
 namespace TNT.Layers.Application.Models
 {
@@ -15,8 +13,7 @@ namespace TNT.Layers.Application.Models
             Take = take;
 
             if (!IsPageSizeValid())
-                throw new BadRequestException(
-                    new ValueDetails(valueName: nameof(Take), detailCode: DetailCodes.OutOfRange));
+                throw BadRequestException.OutOfRange(nameof(Take));
         }
 
         protected virtual int TakeMax => QueryDefaults.TakeMax;

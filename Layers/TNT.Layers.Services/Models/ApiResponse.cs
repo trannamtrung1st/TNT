@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -38,11 +39,20 @@ namespace TNT.Layers.Services.Models
 
         public static ApiResponse BadRequest(ValidationException validationException)
         {
-            var validationErrors = validationException.Errors
-                .Select(o => new ValueDetails(valueName: o.PropertyName, detailCode: o.ErrorCode))
+            var errors = validationException.Errors
+                .Select(o => new ValueDetails(valueName: o.PropertyName, detail: o.ErrorCode))
                 .ToArray();
-            var details = ValueDetails.GetDetails(validationErrors);
-            var apiResponse = BadRequest(data: validationErrors.HasData().ToArray(), details: details);
+            var details = ValueDetails.GetDetails(errors);
+            var apiResponse = BadRequest(data: errors.HasData().ToArray(), details: details);
+            return apiResponse;
+        }
+
+        public static ApiResponse BadRequest(ArgumentException argumentException)
+        {
+            var details = ValueDetails.GetDetails(new ValueDetails(
+                valueName: argumentException.ParamName,
+                detail: argumentException.Message));
+            var apiResponse = BadRequest(details: details);
             return apiResponse;
         }
 
@@ -50,7 +60,7 @@ namespace TNT.Layers.Services.Models
         {
             var validationErrors = modelState.Values
                 .SelectMany(o => o.Errors)
-                .Select(o => new ValueDetails(valueName: nameof(modelState), detailCode: o.ErrorMessage))
+                .Select(o => new ValueDetails(valueName: nameof(modelState), detail: o.ErrorMessage))
                 .ToArray();
             var apiResponse = BadRequest(validationErrors);
             return apiResponse;

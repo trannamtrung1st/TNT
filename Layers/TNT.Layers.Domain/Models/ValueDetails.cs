@@ -9,23 +9,23 @@ namespace TNT.Layers.Domain.Models
         public const string Prefix = "value";
 
         public ValueDetails(
-            string valueName, string detailCode = null,
+            string valueName, string detail = null,
             IReadOnlyDictionary<string, object> data = null)
-            : this(valueName, new[] { detailCode }, data)
+            : this(valueName, new[] { detail }, data)
         {
         }
 
         public ValueDetails(
-            string valueName, IEnumerable<string> detailCodes = null,
+            string valueName, IEnumerable<string> details = null,
             IReadOnlyDictionary<string, object> data = null)
         {
             ValueName = valueName;
-            DetailCodes = detailCodes;
+            Details = details;
             Data = data;
         }
 
         public string ValueName { get; }
-        public IEnumerable<string> DetailCodes { get; }
+        public IEnumerable<string> Details { get; }
         public IReadOnlyDictionary<string, object> Data { get; }
 
         public static IEnumerable<ValueDetails> From(ValidationResult result)
@@ -45,9 +45,12 @@ namespace TNT.Layers.Domain.Models
             return details;
         }
 
-        public override string ToString() => $"{Prefix}:{ValueName}:{string.Join(',', DetailCodes)}";
+        public override string ToString() => $"{Prefix}:{ValueName}:{string.Join(',', Details)}";
 
         public static string[] GetDetails(IEnumerable<ValueDetails> details)
             => details?.Select(o => o.ToString()).ToArray();
+
+        public static string[] GetDetails(params ValueDetails[] details)
+            => GetDetails((IEnumerable<ValueDetails>)details);
     }
 }

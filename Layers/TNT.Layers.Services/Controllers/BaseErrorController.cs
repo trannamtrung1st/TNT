@@ -1,11 +1,10 @@
-﻿using FluentValidation;
+﻿using System;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
-using TNT.Layers.Domain;
 using TNT.Layers.Domain.Exceptions;
-using TNT.Layers.Domain.Models;
 using TNT.Layers.Services.Models;
 
 namespace TNT.Layers.Services.Controllers
@@ -27,8 +26,7 @@ namespace TNT.Layers.Services.Controllers
 
             if (exception == null)
                 return BadRequest(ApiResponse.Exception(
-                    new BadRequestException(
-                        new ValueDetails(nameof(exception), detailCode: DetailCodes.Null))));
+                    BadRequestException.Null(nameof(exception))));
 
             ApiResponse response = null;
             if (exception is NotFoundException notFoundEx)
@@ -44,6 +42,11 @@ namespace TNT.Layers.Services.Controllers
             else if (exception is ValidationException validationEx)
             {
                 response = ApiResponse.BadRequest(validationEx);
+                return BadRequest(response);
+            }
+            else if (exception is ArgumentException argumentEx)
+            {
+                response = ApiResponse.BadRequest(argumentEx);
                 return BadRequest(response);
             }
             else if (exception is BaseException baseEx)
