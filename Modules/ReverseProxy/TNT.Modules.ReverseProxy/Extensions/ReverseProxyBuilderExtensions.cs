@@ -21,29 +21,42 @@ namespace TNT.Modules.ReverseProxy.Extensions
         {
             var routes = new List<RouteConfig>();
             var clusters = new List<ClusterConfig>();
+            var clusterMap = new Dictionary<string, ClusterConfig>();
 
-            foreach (var mapping in options.Mapping)
+            foreach (var kvp in options.Mappings)
             {
-                var routeId = mapping.Key;
-                var clusterId = mapping.Key;
-                var prefix = mapping.Key;
-                var path = Path.Combine(prefix, "{**catch-all}");
-                var destinationAddress = mapping.Value;
-                routes.Add(new RouteConfig
+                var mapping = kvp.Value;
+                var routeId = kvp.Key;
+                var path = mapping.Route;
+                if (!mapping.ExactMatch)
+                    path = Path.Combine(path, "{**catch-all}");
+                if (!clusterMap.TryGetValue(mapping.Destination, out var clusterConfig))
                 {
-                    RouteId = routeId,
-                    ClusterId = clusterId,
-                    Match = new RouteMatch { Path = path },
-                    Transforms = options.DefaultTransforms
-                });
-                clusters.Add(new ClusterConfig
-                {
-                    ClusterId = clusterId,
-                    Destinations = new Dictionary<string, DestinationConfig>
+                    clusterConfig = new ClusterConfig
                     {
-                        [DefaultRootDestination] = new DestinationConfig { Address = destinationAddress }
-                    }
-                });
+                        ClusterId = mapping.Destination,
+                        Destinations = new Dictionary<string, DestinationConfig>
+                        {
+                            [DefaultRootDestination] = new DestinationConfig { Address = mapping.Destination }
+                        }
+                    };
+                    clusters.Add(clusterConfig);
+                    clusterMap[mapping.Destination] = clusterConfig;
+                }
+                var routeConfig = mapping.Config ?? options.DefaultRouteConfig;
+                var route = new RouteConfig
+                {
+                    RouteId = routeConfig?.RouteId ?? routeId,
+                    ClusterId = routeConfig?.ClusterId ?? clusterConfig.ClusterId,
+                    Match = routeConfig?.Match ?? new RouteMatch { Path = path },
+                    AuthorizationPolicy = routeConfig?.AuthorizationPolicy,
+                    CorsPolicy = routeConfig?.CorsPolicy,
+                    MaxRequestBodySize = routeConfig?.MaxRequestBodySize,
+                    Metadata = routeConfig?.Metadata,
+                    Order = routeConfig?.Order,
+                    Transforms = routeConfig?.Transforms,
+                };
+                routes.Add(route);
             }
 
             return builder.LoadFromMemory(routes, clusters);
