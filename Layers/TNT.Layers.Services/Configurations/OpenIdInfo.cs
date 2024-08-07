@@ -23,12 +23,19 @@ namespace TNT.Layers.Services.Configurations
         public string[] LogoutEndpoints { get; set; }
         public string[] UserInfoEndpoints { get; set; }
         public string IdpPublicUrl { get; set; }
+        public bool UseReferenceAccessTokens { get; set; }
+        public bool UseReferenceRefreshTokens { get; set; }
 
         #endregion Server
 
         #region Client
 
+        public string ClientId { get; set; }
+        public string ClientSecret { get; set; }
         public string[] ValidAudiences { get; set; }
+        public bool UseTokenEntryValidation { get; set; }
+        public bool UseAuthorizationEntryValidation { get; set; }
+        public bool UseIntrospection { get; set; }
 
         #endregion Client
 
@@ -43,6 +50,14 @@ namespace TNT.Layers.Services.Configurations
             target.LogoutEndpoints = LogoutEndpoints;
             target.UserInfoEndpoints = UserInfoEndpoints;
             target.IdpPublicUrl = IdpPublicUrl;
+            target.UseReferenceAccessTokens = UseReferenceAccessTokens;
+            target.UseReferenceRefreshTokens = UseReferenceRefreshTokens;
+            target.ValidAudiences = ValidAudiences;
+            target.UseTokenEntryValidation = UseTokenEntryValidation;
+            target.UseAuthorizationEntryValidation = UseAuthorizationEntryValidation;
+            target.UseIntrospection = UseIntrospection;
+            target.ClientId = ClientId;
+            target.ClientSecret = ClientSecret;
         }
 
         public void UseDefaults()
