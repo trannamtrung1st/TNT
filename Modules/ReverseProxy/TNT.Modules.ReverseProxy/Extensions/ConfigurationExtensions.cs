@@ -8,9 +8,9 @@ namespace TNT.Modules.ReverseProxy.Extensions
     {
         public static WebClientDevOptions GetWebClientDev(this IConfiguration configuration, string configKey = "WebClientDev")
         {
-            var openIdInfo = configuration.GetSection(configKey).Get<WebClientDevOptions>()
+            var webClientDev = configuration.GetSection(configKey).Get<WebClientDevOptions>()
                 ?? throw new ArgumentNullException(paramName: configKey);
-            return openIdInfo;
+            return webClientDev;
         }
     }
 }
