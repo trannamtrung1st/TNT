@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
-using TNT.Layers.Services.Configurations;
+using TNT.Layers.Infrastructure.Auth.Configurations;
 
 namespace TNT.Layers.Services.Extensions
 {

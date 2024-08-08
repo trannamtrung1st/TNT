@@ -1,4 +1,4 @@
-namespace TNT.Layers.Services.Configurations
+namespace TNT.Layers.Infrastructure.Auth.Configurations
 {
     public class OpenIdInfo
     {
@@ -36,6 +36,7 @@ namespace TNT.Layers.Services.Configurations
         public bool UseTokenEntryValidation { get; set; }
         public bool UseAuthorizationEntryValidation { get; set; }
         public bool UseIntrospection { get; set; }
+        public string[] Scopes { get; set; }
 
         #endregion Client
 
@@ -52,12 +53,14 @@ namespace TNT.Layers.Services.Configurations
             target.IdpPublicUrl = IdpPublicUrl;
             target.UseReferenceAccessTokens = UseReferenceAccessTokens;
             target.UseReferenceRefreshTokens = UseReferenceRefreshTokens;
+
+            target.ClientId = ClientId;
+            target.ClientSecret = ClientSecret;
             target.ValidAudiences = ValidAudiences;
             target.UseTokenEntryValidation = UseTokenEntryValidation;
             target.UseAuthorizationEntryValidation = UseAuthorizationEntryValidation;
             target.UseIntrospection = UseIntrospection;
-            target.ClientId = ClientId;
-            target.ClientSecret = ClientSecret;
+            target.Scopes = Scopes;
         }
 
         public void UseDefaults()

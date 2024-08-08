@@ -5,6 +5,7 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using TNT.Layers.Infrastructure.Auth.Configurations;
 using TNT.Layers.Services.AuthHandlers.Client;
 using TNT.Layers.Services.Services.Abstracts;
 

@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TNT.Layers.Persistence\TNT.Layers.Persistence.csproj" />
     <ProjectReference Include="..\..\Boilerplates\TNT.Boilerplates.Logging\TNT.Boilerplates.Logging.csproj" />
+    <ProjectReference Include="..\TNT.Layers.Infrastructure\TNT.Layers.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
