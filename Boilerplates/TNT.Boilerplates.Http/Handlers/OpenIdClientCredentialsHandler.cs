@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using OpenIddict.Abstractions;
 using OpenIddict.Client;
 using TNT.Boilerplates.Http.Configurations;
+using static OpenIddict.Abstractions.OpenIddictExceptions;
 using static OpenIddict.Client.OpenIddictClientModels;
 
 namespace TNT.Boilerplates.Http.Handlers
@@ -64,18 +65,23 @@ namespace TNT.Boilerplates.Http.Handlers
             if (string.IsNullOrEmpty(refreshToken))
                 return await GetTokenByClientCredentials(cancellationToken);
 
-            // [TODO]
-            var result = await _client.AuthenticateWithRefreshTokenAsync(new RefreshTokenAuthenticationRequest()
+            try
             {
-                RefreshToken = refreshToken
-            });
+                var result = await _client.AuthenticateWithRefreshTokenAsync(new RefreshTokenAuthenticationRequest()
+                {
+                    RefreshToken = refreshToken,
+                    Scopes = _options.Value.Scopes.ToList(),
+                    DisableUserinfo = true
+                });
 
-            if (!string.IsNullOrEmpty(result.AccessToken))
-            {
-                _refreshToken = result.RefreshToken;
-                _accessTokenExpiry = result.AccessTokenExpirationDate;
-                return result.AccessToken;
+                if (!string.IsNullOrEmpty(result.AccessToken))
+                {
+                    _refreshToken = result.RefreshToken;
+                    _accessTokenExpiry = result.AccessTokenExpirationDate;
+                    return result.AccessToken;
+                }
             }
+            catch (ProtocolException) { }
 
             return await GetTokenByClientCredentials(cancellationToken);
         }
