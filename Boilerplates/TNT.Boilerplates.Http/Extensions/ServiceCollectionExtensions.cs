@@ -7,7 +7,7 @@ namespace TNT.Boilerplates.Http.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddHttpServices(this IServiceCollection services)
+        public static IServiceCollection AddHttpHandlers(this IServiceCollection services)
         {
             return services.AddScoped<ErrorResponseWrapHandler>();
         }
