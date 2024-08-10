@@ -25,7 +25,7 @@
 
     public static class ResultCodes
     {
-        public const string Prefix = "common/";
+        private const string Prefix = "@result/common/";
         public const string ObjectResult = Prefix + "object";
         public const string NotFound = Prefix + "not_found";
         public const string BadRequest = Prefix + "bad_request";
@@ -33,13 +33,8 @@
         public const string UnknownError = Prefix + "unknown_error";
         public const string PersistenceError = Prefix + "persistence_error";
         public const string OperationFailed = Prefix + "operation_failed";
-    }
-
-    public static class DetailCodes
-    {
-        private const string Prefix = "common/";
-        public const string Empty = Prefix + "empty";
-        public const string Null = Prefix + "null";
+        public const string CannotEmpty = Prefix + "cannot_empty";
+        public const string CannotNull = Prefix + "cannot_null";
         public const string AboveMax = Prefix + "above_max";
         public const string UnderMin = Prefix + "under_min";
         public const string OutOfRange = Prefix + "out_of_range";

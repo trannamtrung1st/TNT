@@ -37,18 +37,18 @@ namespace TNT.Layers.Domain.Exceptions
         }
 
         public static BadRequestException Null(string valueName)
-            => new BadRequestException(new ValueDetails(valueName, DetailCodes.Null));
+            => new BadRequestException(new ValueDetails(valueName, ResultCodes.CannotNull));
         public static BadRequestException Empty(string valueName)
-            => new BadRequestException(new ValueDetails(valueName, DetailCodes.Empty));
+            => new BadRequestException(new ValueDetails(valueName, ResultCodes.CannotEmpty));
         public static BadRequestException AboveMax(string valueName)
-            => new BadRequestException(new ValueDetails(valueName, DetailCodes.AboveMax));
+            => new BadRequestException(new ValueDetails(valueName, ResultCodes.AboveMax));
         public static BadRequestException UnderMin(string valueName)
-            => new BadRequestException(new ValueDetails(valueName, DetailCodes.UnderMin));
+            => new BadRequestException(new ValueDetails(valueName, ResultCodes.UnderMin));
         public static BadRequestException OutOfRange(string valueName)
-            => new BadRequestException(new ValueDetails(valueName, DetailCodes.OutOfRange));
+            => new BadRequestException(new ValueDetails(valueName, ResultCodes.OutOfRange));
         public static BadRequestException InvalidFormat(string valueName)
-            => new BadRequestException(new ValueDetails(valueName, DetailCodes.InvalidFormat));
+            => new BadRequestException(new ValueDetails(valueName, ResultCodes.InvalidFormat));
         public static BadRequestException InvalidValue(string valueName)
-            => new BadRequestException(new ValueDetails(valueName, DetailCodes.InvalidValue));
+            => new BadRequestException(new ValueDetails(valueName, ResultCodes.InvalidValue));
     }
 }

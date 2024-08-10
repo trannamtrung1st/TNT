@@ -6,7 +6,9 @@ namespace TNT.Layers.Domain.Models
 {
     public class ValueDetails
     {
-        public const string Prefix = "value";
+        public const string Prefix = "@value/";
+        public const char Separator = '=';
+        public const char DetailsSeparator = ',';
 
         public ValueDetails(
             string valueName, string detail = null,
@@ -45,7 +47,7 @@ namespace TNT.Layers.Domain.Models
             return details;
         }
 
-        public override string ToString() => $"{Prefix}:{ValueName}:{string.Join(',', Details)}";
+        public override string ToString() => $"{Prefix}{ValueName}{Separator}{string.Join(DetailsSeparator, Details)}";
 
         public static string[] GetDetails(IEnumerable<ValueDetails> details)
             => details?.Select(o => o.ToString()).ToArray();
