@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Text.Json.Serialization;
 using TNT.Layers.Services.Configurations;
 using TNT.Layers.Services.Filters;
 using TNT.Layers.Services.Middlewares;
@@ -73,10 +74,21 @@ namespace TNT.Layers.Services.Extensions
         public static IMvcBuilder AddControllersDefaults(
             this IServiceCollection services, Action<MvcOptions> extraConfigure = null)
         {
-            return services.AddControllers(opt =>
+            return services.AddControllers(options =>
             {
-                opt.Filters.Add<ApiResponseWrapFilter>();
-                extraConfigure?.Invoke(opt);
+                options.Filters.Add<ApiResponseWrapFilter>();
+                extraConfigure?.Invoke(options);
+            });
+        }
+
+        public static IMvcBuilder AddJsonDefaults(
+            this IMvcBuilder mvcBuilder, Action<JsonOptions> extraConfigure = null)
+        {
+            return mvcBuilder.AddJsonOptions(options =>
+            {
+                var enumConverter = new JsonStringEnumConverter();
+                options.JsonSerializerOptions.Converters.Add(enumConverter);
+                extraConfigure?.Invoke(options);
             });
         }
 
