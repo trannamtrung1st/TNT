@@ -9,19 +9,16 @@ namespace TNT.Boilerplates.Concurrency
     public class SyncAsyncTaskLimiter : DynamicRateLimiter, ISyncAsyncTaskLimiter
     {
         private int _asyncCount;
-        private readonly int _maxAsyncLimit;
 
-        public SyncAsyncTaskLimiter(
-            TaskLimiterOptions limiterOptions,
-            ILogger<SyncAsyncTaskLimiter> logger) : base(limiterOptions: limiterOptions)
+        public SyncAsyncTaskLimiter(TaskLimiterOptions limiterOptions) : base(limiterOptions: limiterOptions)
         {
             Options = limiterOptions;
-            // Reference: https://engineering.zalando.com/posts/2019/04/how-to-set-an-ideal-thread-pool-size.html
-            _maxAsyncLimit = (int)(limiterOptions.AvailableCores * limiterOptions.TargetCpuUtil * (1 + limiterOptions.WaitTime / limiterOptions.ServiceTime));
-            logger.LogDebug("Max async limit: {Limit}", _maxAsyncLimit);
         }
 
         public TaskLimiterOptions Options { get; }
+
+        // Reference: https://engineering.zalando.com/posts/2019/04/how-to-set-an-ideal-thread-pool-size.html
+        public int MaxAsyncLimit => (int)(Options.AvailableCores * Options.TargetCpuUtil * (1 + Options.WaitTime / Options.ServiceTime));
 
         protected override IDisposable AcquireCore(int count, bool wait)
         {
@@ -37,6 +34,6 @@ namespace TNT.Boilerplates.Concurrency
             base.Release(count);
         }
 
-        protected override bool CanAcquired() => _asyncCount < _maxAsyncLimit && base.CanAcquired();
+        protected override bool CanAcquired() => _asyncCount < MaxAsyncLimit && base.CanAcquired();
     }
 }
